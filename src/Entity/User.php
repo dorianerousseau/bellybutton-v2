@@ -117,7 +117,13 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity="App\Entity\Campaign", mappedBy="users")
      */
     private $campaigns;
-
+    
+    private $idAgency;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\InfluencerManagement\InfoContact, mappedBy="id")
+     */
+    private $idInfoContact;
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */

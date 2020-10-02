@@ -13,12 +13,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
  class Performance
  {
+   // TODO link that to userID using the success() function inside InfluencerController.php
      /**
-      * @ORM\Id()
-      * @ORM\GeneratedValue()
       * @ORM\Column(type="integer")
       */
-    private $id;
+    private $idUser;
     /**
      * @ORM\Column(type="integer")
      */

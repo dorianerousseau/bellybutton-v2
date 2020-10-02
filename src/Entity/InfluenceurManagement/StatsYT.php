@@ -52,6 +52,7 @@ class StatsYT
     private $nbComsYT;
     /**
      * @ORM\Column(type="integer")
+     * @ORM\
      */
     private $idAudience;
     /**
