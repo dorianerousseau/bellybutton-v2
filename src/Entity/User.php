@@ -121,9 +121,10 @@ class User implements UserInterface
     private $idAgency;
     
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\InfluencerManagement\InfoContact, mappedBy="id")
+     * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity="App\Entity\InfluencerManagement\InfoContact", mappedBy="id")
      */
-    private $idInfoContact;
+    private $infoContact;
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
