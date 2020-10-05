@@ -6,20 +6,27 @@
  */#}
 {% extends 'main/base.html.twig' %}
 
-{# TODO figure out the css implementation#}
+
 {% block title %} Influenceur Management {% endblock %}
 
+{# TODO figure out the css implementation
+    This seems to work(==>Not tested)#}
+{% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+{% endblock %}
 
 {% block body %}
 
 <div>
 <div class="influencerManagement">
     <h1 class="influencerManagement__h1">this is a <span class="influencerManagement__h1__span">test</span></h1>
-    {#TODO: figure out how to link this like it is present on "home.html.twig" #}
-    {# <a href="{{ path('influencerManagement') }}" class="btn btn--influencerManagement">Ajouter un influenceur</a> #}
+
+{#TODO: figure out how to link this like it is present on "home.html.twig"
+ See webpack.config.js for the configuration; it's basicaly the same philosophy as Symfony Routes#}
+{# <a href="{{ path('influencerManagement') }}" class="btn btn--influencerManagement">Ajouter un influenceur</a> #}
 </div>
 {# TODO figure out how to build a form using symfony==> Check on InfluencerType.php for the PHP part and register.html.twig for the template implementation #}
-{# TODO a route is needed to call a function, so instead of calling a function, i call a route to make treatments #}
+{# TODO a route is needed to call a function, so instead of calling a function, i call a route to make treatments (like register a form)#}
 <div class="influencerManagement_addForm">
     <form>
         <label for="lname">Nom:</label><br>

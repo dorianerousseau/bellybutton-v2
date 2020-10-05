@@ -9,7 +9,6 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class InfluencerManagementController extends AbstractController
@@ -25,17 +24,54 @@ class InfluencerManagementController extends AbstractController
         return $this->render('influencerManagement/add.html.twig');
     }
     /**
-     * @Route("InfluencerMangement/", name="influencerList")
+     * @Route("InfluencerMangement/", name="influencerView")
      */
     public function influencer()
     {
         return $this->render('influencerManagement/influencer.html.twig');
     }
+
+    //TODO check if this could be integrated into influencerView instead, as a "pop-up" or a subpage
     /**
      * @Route("InfluencerManagement/delete", name="deleteInfluencer")
      */
     public function removeInfluencer()
     {
         return $this->render('influencerManagement/remove.html.twig');
+    }
+
+    // TODO make this as a "pop-up" or a subpage?
+    /**
+     * @Route("InfluencerManagement/modif", name="modifInfluencer")
+     */
+    public function modifInfluencer()
+    {
+        return $this->render('influencerManagement/modif.html.twig');
+    }
+
+    //TODO See if i can make this in pure PHP it can save me some time messing with Doctrine
+    /**
+     * @Route("InfluencerManagement/select", name="selectInfluencer")
+     */
+    public function selectInfluencer()
+    {
+        return $this-> render('influencerManagement/select.html.twig');
+    }
+    
+    //---------------------------------------------------------------------------------------------------------------------------------
+     //TODO check if this could be integrated into influencerView instead, as a "pop-up" or a subpage
+    public function addAgency()
+    {
+        return $this-> render('influencerManagement/addAgency.html.twig');
+    }
+     //TODO check if this could be integrated into influencerView instead, as a "pop-up" or a subpage
+    public function modifAgency()
+    {
+        return $this-> render('influencerManagement/modifAgency.html.twig');
+    }
+     //TODO check if this could be integrated into influencerView instead, as a "pop-up" or a subpage
+    public function deleteAgency()
+    {
+        return $this-> render('influencerManagement/deleteAgency.html.twig');
     }
 }
