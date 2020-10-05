@@ -133,6 +133,8 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+
+     // TODO add Description column to handle the description of influencers into presentations
     private $resetToken;
 
     public function __construct()

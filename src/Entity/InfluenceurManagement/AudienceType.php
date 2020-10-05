@@ -26,6 +26,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
      * @ORM\Column(type="integer")
      */
     private $idAudience;
+    //Country are stored like this [CountryName]_[PercentageOfAudience].
+    //If France is 45% of audience of an influencer, it must be stored like that: "France_45"
     /**
      * @ORM\Column(type="string")
      */
@@ -46,4 +48,49 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
      * @ORM\Column(type="integer")
      */
     private $shareH;
+
+    //Theses ages are stored as percentages
+
+    //handle all ages under 13
+    
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $less13;
+
+    //handle all ages between 13 and 17
+   
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $less17;
+
+    //handle all ages between 18 and 24
+   
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $less24;
+
+    //handle all ages between 25 and 34
+    
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $less34;
+
+    //handle all ages between 35 and 44
+   
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $less44;
+
+   // handles all ages after 45
+   
+   /**
+     * @ORM\Column(type="integer")
+     */
+    private $more45;
+
  }
