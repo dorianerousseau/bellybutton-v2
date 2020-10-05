@@ -117,7 +117,11 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity="App\Entity\Campaign", mappedBy="users")
      */
     private $campaigns;
-
+    
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $commentary;
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */

@@ -40,4 +40,8 @@ class Agency
      * @ORM\Column(type="integer")
      */
     private $idContact;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $commentary;
 }
