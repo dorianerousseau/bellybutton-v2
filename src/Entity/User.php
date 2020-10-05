@@ -117,7 +117,8 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity="App\Entity\Campaign", mappedBy="users")
      */
     private $campaigns;
-
+    // TODO Error here :"[Semantical Error] Couldn't find constant mappedBy, property App\Entity\User::$idAgency."
+    // TODO Why it is mapped as a "constant"
     /**
      * @ORM\Column(type="integer")
      * @ORM\OneToMany(targetEntity="App\Entity\InfluenceurManagement\Agency", mappedBy"id")

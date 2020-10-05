@@ -1,4 +1,11 @@
 <?php 
+
+/**
+ * Name: InfluencerManagementController.php
+ * Author: Flavien Macquignon
+ * Date: 05/10/2020
+ * Comment: This file handle all the compute function of the influencer management dashboard of Bellybutton Group
+ */
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

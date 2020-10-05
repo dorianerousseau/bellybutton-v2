@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Name: Agency.php
+ * Author: Flavien Macquignon
+ * Date: 05/10/2020
+ * Comment: This file is file destined to connect to the BB_Central Database and create a Agency table for contacting purposes
+ */
 namespace App\Entity;
 
 
