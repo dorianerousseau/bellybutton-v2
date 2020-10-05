@@ -117,14 +117,33 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity="App\Entity\Campaign", mappedBy="users")
      */
     private $campaigns;
+<<<<<<< HEAD
     
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $commentary;
+=======
+    // FIXME Error here :"[Semantical Error] Couldn't find constant mappedBy, property App\Entity\User::$idAgency."
+    // FIXME Why it is mapped as a "constant"
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity="App\Entity\InfluenceurManagement\Agency", mappedBy"id")
+     */
+    private $idAgency;
+    
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity="App\Entity\InfluenceurManagement\InfoContact", mappedBy="id")
+     */
+    private $infoContact;
+>>>>>>> influencer_management_DB_Referencement
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+
+     // TODO add Description column to handle the description of influencers into presentations
+     // TODO add Column for handling PATH to pictures==> See with Bren on how to store it
     private $resetToken;
 
     public function __construct()
