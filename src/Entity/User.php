@@ -117,13 +117,13 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity="App\Entity\Campaign", mappedBy="users")
      */
     private $campaigns;
-<<<<<<< HEAD
+
     
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $commentary;
-=======
+
     // FIXME Error here :"[Semantical Error] Couldn't find constant mappedBy, property App\Entity\User::$idAgency."
     // FIXME Why it is mapped as a "constant"
     /**
@@ -137,7 +137,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\InfluenceurManagement\InfoContact", mappedBy="id")
      */
     private $infoContact;
->>>>>>> influencer_management_DB_Referencement
+
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
