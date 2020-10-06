@@ -10,6 +10,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
+//FIXME check all NOTBLANK issue
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity("email")
@@ -117,12 +119,15 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity="App\Entity\Campaign", mappedBy="users")
      */
     private $campaigns;
+
+    //FIXME idAgency cannot be null on new enterprise ==>link on idAgency of Agency cannot be made directly
     /**
      * @ORM\Column(type="integer")
      * @ORM\OneToMany(targetEntity="App\Entity\InfluenceurManagement\Agency", mappedBy="id")
      */
     private $idAgency;
     
+    //FIXME maybe same problem here as idAgency
     /**
      * @ORM\Column(type="integer")
      * @ORM\OneToMany(targetEntity="App\Entity\InfluenceurManagement\InfoContact", mappedBy="id")
