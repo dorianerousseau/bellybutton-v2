@@ -33,7 +33,7 @@ class infoContact
      */
     private $mailPro;
     /**
-     * @ORM\Column(type="integer", length=10)
+     * @ORM\Column(type="integer", length=17)
      * @Assert\NotBlank
      */
     private $phoneNumber;
@@ -43,11 +43,74 @@ class infoContact
      */
     private $postalAdress;
     /**
-     * @ORM\Column(type="integer", length=10)
+     * @ORM\Column(type="string", length=17)
      */
     private $numWhatsApp;
     /**
      * @ORM\Column(type="string", length=100)
      */
     private $preferedContact;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $commentary;
+
+    public function getmailPro(): ?string
+    {
+        return $this->mailPro;
+    }
+    public function setmailPro(string $mailPro): self
+    {
+        $this->mailPro = $mailPro;
+        return $this;
+    }
+    public function getphoneNumber(): ?int
+    {
+        return $this->phoneNumber;
+    }
+    public function setphoneNumber(int $phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
+        return $this;
+    }
+    public function getpostalAdress(): ?string
+    {
+        return $this->postalAdress;
+    }
+    public function setpostalAdress(string $postalAdress)
+    {
+        $this->postalAdress= $postalAdress;
+        return $this;
+    }
+    public function getnumWhatsApp(): ?string
+    {
+        return $this->numWhatsApp;
+    }
+    public function setnumWhatsApp( string $numWhatsApp)
+    {
+        $this->numWhatsApp = $numWhatsApp;
+        return $this;
+    }
+
+    public function getpreferredContact(): ?string
+    {
+        return $this->preferedContact;
+    }
+
+    public function setpreferedContact(string $preferedContact)
+    {
+        $this->preferedContact = $preferedContact;
+        return $this;
+    }
+
+    public function getcommentary(): ?string
+    {
+        return $this->commentary;
+    }
+    public function setcommentary(string $commentary)
+    {
+        $this->commentary =$commentary;
+        return $this;
+    }
 }

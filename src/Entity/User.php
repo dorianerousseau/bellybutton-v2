@@ -137,15 +137,15 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\InfluenceurManagement\InfoContact", mappedBy="id")
      */
     private $infoContact;
+     // TODO add Description column to handle the description of influencers into presentations
+     // TODO add Column for handling PATH to pictures==> See with Bren on how to store it
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-
-     // TODO add Description column to handle the description of influencers into presentations
-     // TODO add Column for handling PATH to pictures==> See with Bren on how to store it
     private $resetToken;
 
+    //TODO modify the constructor to handle the extra columns
     public function __construct()
     {
         $this->userRoles = new ArrayCollection();
