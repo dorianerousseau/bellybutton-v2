@@ -58,7 +58,7 @@ class Performance
    */
   private $margin;
 
-  // TODO figure out a path to add here and how to use it on output
+  // TODO figure out a path to add here and how to use it on output; also how to input the file
   /**
    * @ORM\Column(type="string")
    */
