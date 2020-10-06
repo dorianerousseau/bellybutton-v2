@@ -17,6 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class StatsIG
 {
+    //TODO check how to update this table hourly
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -45,5 +46,7 @@ class StatsIG
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
+
+    //Constructors
 
 }

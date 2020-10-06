@@ -46,4 +46,49 @@ class Agency
      * @ORM\Column(type="integer")
      */
     private $idContact;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $commentary;
+
+    // Contructors
+
+    //TODO build this constructor for PDO (https://www.php.net/manual/fr/pdo.construct.php)
+    //TODO then __construct is build, build it to all other entity
+    public function __construct()
+    {
+
+    }
+    public function getnameAgency(): ?string
+    {
+        return $this->nameAgency;
+    }
+
+    public function setnameagency(string $nameAgency)
+    {
+        $this->nameAgency = $nameAgency;
+        return $this;
+    }
+
+    public function getnameContact(): ?string
+    {
+        return $this->nameContact;
+    }
+    public function setnameContact(string $nameContact)
+    {
+        $this->nameContact = $nameContact;
+        return $this;
+    }
+
+    public function getcommentary(): ?string
+    {
+        return $this->commentary;
+    }
+
+    public function setcommentary(string $commentary)
+    {
+        $this->commentary = $commentary;
+        return $this;
+    }
+
 }

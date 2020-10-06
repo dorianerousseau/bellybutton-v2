@@ -71,4 +71,65 @@ class Performance
    * @ORM\Column(type="string")
    */
   private $pictureSmall;
+
+  public function getaudienceCategorie(): ?int
+  {
+    return $this->audienceCategorie;
+  }
+  public function setaudienceCategorie(int $audienceCategorie)
+  {
+    $this->audienceCategorie = $audienceCategorie;
+    return $this;
+  }
+  public function getstatus(): ?int
+  {
+    return $this->status;
+  }
+  public function setstatus(int $status)
+  {
+    $this->status = $status;
+    return $this;
+  }
+  public function getsector(): ?int
+  {
+    return $this->sector;
+  }
+  public function setsector(int $sector)
+  {
+    $this->sector = $sector;
+    return $this;
+  }
+
+  public function getmargin(): ?int
+  {
+    return $this->margin;
+  }
+  public function setmargin(int $margin)
+  {
+    $this->margin = $margin;
+    return $this;
+  }
+
+  public function getpictureLarge(): ?string
+  {
+    return $this->pictureLarge;
+  }
+
+  // TODO check how to upload the picture to the server
+  public function setpictureLarge(string $pictureLarge)
+  {
+    $this->pictureLarge = $pictureLarge;
+    return $this;
+  }
+  public function getpictureSmall(): ?string
+  {
+    return $this->pictureSmall;
+  }
+  //TODO check the todo of setpictureLarge()
+  public function setpictureSmall(string $pictureSmall)
+  {
+    $this->pictureSmall = $pictureSmall;
+    return $this;
+  }
+
 }
