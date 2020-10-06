@@ -21,7 +21,7 @@ class StatsIG
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @ORM\OneToMany(targetEntity="App\Entity\InfluenceurManagement\Performance", inversedBy="idStatsIG")
+     * @ORM\OneToMany(targetEntity="App\Entity\InfluenceurManagement\Performance", mappedBy="idStatsIG")
      */
     private $idStatsIG;
     /**
@@ -38,6 +38,7 @@ class StatsIG
     private $nbrAboIG;
     /**
      * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\InfluencerManagement", inversedBy="idAudience")
      */
     private $idAudience;
     /**

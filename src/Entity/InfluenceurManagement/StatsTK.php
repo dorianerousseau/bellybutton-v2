@@ -21,7 +21,7 @@ class StatsTK
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @ORM\OneToMany(targetEntity="App\Entity\InfluenceurManagement\StatsTK", inversedBy="idStatsTK")
+     * @ORM\OneToMany(targetEntity="App\Entity\InfluenceurManagement\StatsTK", mappedBy="idStatsTK")
      */
     private $idStatsTK;
     /**
@@ -42,6 +42,7 @@ class StatsTK
     private $nbrVuesTK;
     /**
      * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\InfluencerManagement", inversedBy="idAudience")
      */
     private $idAudience;
     /**

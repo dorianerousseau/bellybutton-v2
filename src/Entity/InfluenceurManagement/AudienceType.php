@@ -24,6 +24,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity="App\Entity\InfluencerManagement\StatsYT", mappedBy="idAudience")
+     * @ORM\OneToMany(targetEntity="App\Entity\InfluencerManagement\StatsIG", mappedBy="idAudience")
+     * @ORM\OneToMany(targetEntity="App\Entity\InfluencerManagement\StatsTW", mappedBy="idAudience")
+     * @ORM\OneToMany(targetEntity="App\Entity\InfluencerManagement\StatsTK", mappedBy="idAudience") 
      */
     private $idAudience;
     //Country are stored like this [CountryName]_[PercentageOfAudience].
