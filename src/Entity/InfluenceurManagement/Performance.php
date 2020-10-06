@@ -27,18 +27,22 @@ class Performance
   private $idUser;
   /**
    * @ORM\Column(type="integer")
+   * @ORM\ManyToOne(targeEntity="App\Entity\InfluenceurManagement\StatsYT", mappedBy="idStatsYT")
    */
   private $idStatsYT;
   /**
    * @ORM\Column(type="integer")
+   * @ORM\ManyToOne(targetEntity="App\Entity\InfluenceurManagement\StatsIG", mappedBy="idStatsIG")
    */
   private $idStatsIG;
   /**
    * @ORM\Column(type="integer")
+   * @ORM\ManyToOne(targetEntity="App\Entity\InfluenceurManagement\StatsTW", mappedBy="idStatsTW")
    */
   private $idStatsTW;
   /**
    * @ORM\Column(type="integer")
+   * @ORM\ManyToOne(targetEntity="App\Entity\InfluenceurManagement\StatsTK", mappedBy="idStatsTK")
    */
   private $idStatsTK;
   /**

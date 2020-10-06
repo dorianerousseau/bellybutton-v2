@@ -21,6 +21,7 @@ class StatsYT
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity="App\Entity\InfluenceurManagement\Performance", inversedBy="idStatsYT")
      */
     private $idStatsYT;
     /**
