@@ -126,8 +126,7 @@ class User implements UserInterface
      */
     private $commentary;
 
-    // FIXME Error here :"[Semantical Error] Couldn't find constant mappedBy, property App\Entity\User::$idAgency."
-    // FIXME Why it is mapped as a "constant"
+    //FIXME issue here, on creation of user; connot be blank==> need to link it without primary id
     /**
      * @ORM\Column(type="integer")
      * @ORM\OneToMany(targetEntity="App\Entity\InfluenceurManagement\Agency", mappedBy="id")
