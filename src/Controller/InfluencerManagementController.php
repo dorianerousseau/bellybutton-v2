@@ -24,11 +24,11 @@ class InfluencerManagementController extends AbstractController
         return $this->render('influencerManagement/add.html.twig');
     }
     /**
-     * @Route("InfluencerMangement/", name="influencerView")
+     * @Route("InfluencerMangement/influencerView", name="influencerView")
      */
     public function influencer()
     {
-        return $this->render('influencerManagement/influencer.html.twig');
+        return $this->render('influencerManagement/index.html.twig');
     }
 
     //TODO check if this could be integrated into influencerView instead, as a "pop-up" or a subpage
@@ -59,7 +59,8 @@ class InfluencerManagementController extends AbstractController
     }
     
     //---------------------------------------------------------------------------------------------------------------------------------
-     //TODO check if this could be integrated into influencerView instead, as a "pop-up" or a subpage
+    //TODO use iframe to render theses pages insides another as "pop-up" 
+    //TODO check if this could be integrated into influencerView instead, as a "pop-up" or a subpage
     public function addAgency()
     {
         return $this-> render('influencerManagement/addAgency.html.twig');

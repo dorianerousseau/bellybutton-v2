@@ -1,21 +1,22 @@
-{# /**
- * Name: add.html.twig.php
- * Author: Flavien Macquignon
- * Date: 05/10/2020
- * Comment: This file is a template to add a information about a influencer into the database
- */#}
+{#
+ Name: add.html.twig
+ Author: Flavien Macquignon
+ Date: 05/10/2020
+ Comment: This file is a template to add a information about a influencer into the database
+ #}
 {% extends 'main/base.html.twig' %}
 
 
-{% block title %} Influenceur Management {% endblock %}
+{% block title %} Ajouter un Influenceur {% endblock %}
 
-{# TODO figure out the css implementation
-    This seems to work(==>Not tested)#}
+ TODO figure out the css implementation
+    This seems to work(==>Not tested)
 {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
 {% endblock %}
 
-{% block body %}
+{% block body %} 
+
 
 <div>
 <div class="influencerManagement">
@@ -35,5 +36,5 @@
         <input type="text" id="fname" name="fname">
       </form> 
 </div>
-</div>
-{% endblock %}
+</div> 
+{% endblock %} 
