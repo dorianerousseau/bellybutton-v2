@@ -64,6 +64,8 @@ class User implements UserInterface
      */
     private $status;
 
+    //TODO add idTwitch
+
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
@@ -120,7 +122,7 @@ class User implements UserInterface
      */
     private $campaigns;
 
-    
+    //TODO check if this needs to be the commentary in presentation; or the internal commentary
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -141,7 +143,7 @@ class User implements UserInterface
     private $infoContact;
      // TODO add Description column to handle the description of influencers into presentations
      // TODO add Column for handling PATH to pictures==> See with Bren on how to store it
-
+     // TODO Add a numberOpéBB column ==> SELECT SUM on campaign_user
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */

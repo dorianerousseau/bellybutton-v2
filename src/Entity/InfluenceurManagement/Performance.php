@@ -19,12 +19,15 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Performance
 {
   // TODO link that to userID using the success() function inside InfluencerController.php
+  // FIXME this can't be the key value because not every user under success() will not necesserely have a performance tab into it
   /**
    * @ORM\Id()
    * @ORM\GeneratedValue()
    * @ORM\Column(type="integer")
    */
   private $idUser;
+
+  // TODO Correct the integer in all idStats; it must be a string no?
   /**
    * @ORM\Column(type="integer")
    * @ORM\ManyToOne(targetEntity="App\Entity\InfluenceurManagement\StatsYT", inversedBy="idStatsYT")
