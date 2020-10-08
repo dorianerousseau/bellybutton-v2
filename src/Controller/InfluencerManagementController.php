@@ -16,6 +16,9 @@ class InfluencerManagementController extends AbstractController
     //TODO figure out a way to secure the acess to this controler==> Maybe link it the same way as Dashboard
     //TODO figure out the service runner for TK; IG and TW (YT seems implemented) ==> Maybe implement a meta-runner?
 
+
+    // TODO Add a way to handles calls to the DB; maybe by using SQL script?
+    // 
     /**
      * @Route("InfluencerManagement/add", name="addInfluencer")
      */
