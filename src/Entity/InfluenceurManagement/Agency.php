@@ -51,8 +51,9 @@ class Agency
      * @ORM\Column(type="integer", nullable=true)
      */
     private $idContact;
+
     /**
-     * @ORM\Colum(type="string, nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $NameSpecialContact;
     /**
