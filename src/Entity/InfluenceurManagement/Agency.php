@@ -43,16 +43,20 @@ class Agency
     private $idDefaultContact;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\NotBlank
      */
     private $nameContact;
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $idContact;
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Colum(type="string, nullable=true)
+     */
+    private $NameSpecialContact;
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $commentary;
 

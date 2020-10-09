@@ -25,11 +25,11 @@ class StatsTW
      */
     private $idStatsTW;
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $averageViewTW;
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $nbrAboTW;
     /**

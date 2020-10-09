@@ -27,32 +27,32 @@ class infoContact
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=180, unique=true, nullable=true)
      * @Assert\NotBlank
      * @Assert\Email
      */
     private $mailPro;
     /**
-     * @ORM\Column(type="integer", length=17)
+     * @ORM\Column(type="integer", length=17, nullable=true)
      * @Assert\NotBlank
      */
     private $phoneNumber;
 
     /**
-     * @ORM\Column(type="string", length=500)
+     * @ORM\Column(type="string", length=500, nullable=true)
      */
     private $postalAdress;
     /**
-     * @ORM\Column(type="string", length=17)
+     * @ORM\Column(type="string", length=17, nullable=true)
      */
     private $numWhatsApp;
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $preferedContact;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $commentary;
 

@@ -56,42 +56,42 @@ class AudienceType
    //handle all ages under 13
 
    /**
-    * @ORM\Column(type="integer")
+    * @ORM\Column(type="integer", nullable=true)
     */
    private $less13;
 
    //handle all ages between 13 and 17
 
    /**
-    * @ORM\Column(type="integer")
+    * @ORM\Column(type="integer", nullable=true)
     */
    private $less17;
 
    //handle all ages between 18 and 24
 
    /**
-    * @ORM\Column(type="integer")
+    * @ORM\Column(type="integer", nullable=true)
     */
    private $less24;
 
    //handle all ages between 25 and 34
 
    /**
-    * @ORM\Column(type="integer")
+    * @ORM\Column(type="integer", nullable=true)
     */
    private $less34;
 
    //handle all ages between 35 and 44
 
    /**
-    * @ORM\Column(type="integer")
+    * @ORM\Column(type="integer", nullable=true)
     */
    private $less44;
 
    // handles all ages after 45
 
    /**
-    * @ORM\Column(type="integer")
+    * @ORM\Column(type="integer", nullable=true)
     */
    private $more45;
 

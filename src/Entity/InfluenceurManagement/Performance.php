@@ -29,27 +29,27 @@ class Performance
 
   // TODO Correct the integer in all idStats; it must be a string no?
   /**
-   * @ORM\Column(type="integer")
+   * @ORM\Column(type="integer", nullable=true)
    * @ORM\ManyToOne(targetEntity="App\Entity\InfluenceurManagement\StatsYT", inversedBy="idStatsYT")
    */
   private $idStatsYT;
   /**
-   * @ORM\Column(type="integer")
+   * @ORM\Column(type="integer", nullable=true)
    * @ORM\ManyToOne(targetEntity="App\Entity\InfluenceurManagement\StatsIG", inversedBy="idStatsIG")
    */
   private $idStatsIG;
   /**
-   * @ORM\Column(type="integer")
+   * @ORM\Column(type="integer", nullable=true)
    * @ORM\ManyToOne(targetEntity="App\Entity\InfluenceurManagement\StatsTW", inversedBy="idStatsTW")
    */
   private $idStatsTW;
   /**
-   * @ORM\Column(type="integer")
+   * @ORM\Column(type="integer", nullable=true)
    * @ORM\ManyToOne(targetEntity="App\Entity\InfluenceurManagement\StatsTK", inversedBy="idStatsTK")
    */
   private $idStatsTK;
   /**
-   * @ORM\Column(type="integer")
+   * @ORM\Column(type="integer", nullable=true)
    */
   private $audienceCategorie;
   /**
@@ -118,7 +118,7 @@ class Performance
     return $this->pictureLarge;
   }
 
-  // TODO check how to upload the picture to the server
+  // TODO check how to upload the picture to the server; this column will store the PATH to the .jpg file
   public function setpictureLarge(string $pictureLarge)
   {
     $this->pictureLarge = $pictureLarge;
