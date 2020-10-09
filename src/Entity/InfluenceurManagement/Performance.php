@@ -49,7 +49,7 @@ class Performance
    */
   private $idStatsTK;
   /**
-   * @ORM\Column(type="integer", nullable=true)
+   * @ORM\Column(type="integer")
    */
   private $audienceCategorie;
   /**
@@ -61,17 +61,17 @@ class Performance
    */
   private $sector;
   /**
-   * @ORM\Column(type="integer", length=2)
+   * @ORM\Column(type="integer", length=2, nullable=true)
    */
   private $margin;
 
   // TODO figure out a path to add here and how to use it on output; also how to input the file
   /**
-   * @ORM\Column(type="string")
+   * @ORM\Column(type="string", nullable=true)
    */
   private $pictureLarge;
   /**
-   * @ORM\Column(type="string")
+   * @ORM\Column(type="string", nullable=true)
    */
   private $pictureSmall;
 
