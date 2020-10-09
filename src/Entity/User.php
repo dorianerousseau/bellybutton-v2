@@ -92,6 +92,10 @@ class User implements UserInterface
     private $idTiktok;
 
     /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -122,22 +126,19 @@ class User implements UserInterface
      */
     private $campaigns;
 
-    //TODO check if this needs to be the commentary in presentation; or the internal commentary
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $commentary;
 
-    //FIXME issue here, on creation of user; connot be blank==> need to link it without primary id
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\OneToMany(targetEntity="App\Entity\InfluenceurManagement\Agency", mappedBy="id")
+     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\InfluenceurManagement\Agency", mappedBy="user_id")
      */
     private $idAgency;
     
-    //FIXME maybe same problem here as idAgency
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * @ORM\OneToMany(targetEntity="App\Entity\InfluenceurManagement\InfoContact", mappedBy="id")
      */
     private $infoContact;
