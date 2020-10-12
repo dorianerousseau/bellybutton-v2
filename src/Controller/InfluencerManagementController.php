@@ -8,6 +8,7 @@
  */
 namespace App\Controller;
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -31,7 +32,12 @@ class InfluencerManagementController extends AbstractController
      */
     public function influencer()
     {
-        return $this->render('influencerManagement/index.html.twig');
+        $id=5;
+        $user1= new User();
+        dump($user1);
+        $user1= $this->getDoctrine()->getRepository(User::class)->find($id);
+        dump($user1);
+        return $this->render('influencerManagement/index.html.twig', ['user1'=>$user1->getEmail()] );
     }
 
     //TODO check if this could be integrated into influencerView instead, as a "pop-up" or a subpage
