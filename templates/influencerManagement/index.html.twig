@@ -18,12 +18,12 @@ Comment: This file is the template to the homepage of the influencer management 
       <!-- //TODO This is an example table for testing purpose; i need to isolate one row and use a loop to fill it for each row in the DB-->
       <!-- //TODO Check how to do it; maybe by using a routing function and a do...while(PDO not empty); call to the DB here is a BAD IDEA -->
       <div class="list_influenceur">
-        
+        {% for user in users %}
         <table style="width: 100%" border="18">
           <tbody>
+            {% set k = loop.index %}
             <tr>
-              <td> {{ user1 }}
-              </td>
+              <td> {{ users[k].getEmail() }}</td>
               <td><br>
               </td>
               <td><br>
@@ -47,6 +47,7 @@ Comment: This file is the template to the homepage of the influencer management 
             </tr>
           </tbody>
         </table>
+        {% endfor %}
       </div>
 
     </main>

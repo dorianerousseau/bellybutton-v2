@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use PDO;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,8 +17,24 @@ class InfluencerManagementController extends AbstractController
 {   //TODO extend the number of routes that connect to this controler
     //TODO figure out a way to secure the acess to this controler==> Maybe link it the same way as Dashboard
     //TODO figure out the service runner for TK; IG and TW (YT seems implemented) ==> Maybe implement a meta-runner?
+   
 
+    //FIXME issue with access right on the DATBASE; check doctrine Coonfig to fix it
+    //Constant for PDO
+    const host = '127.0.0.1';
+    const port = '3306';
+    const db   = 'bellybutton';
+    const user = 'root';
+    const pass = '';
+    const charset = 'utf8';
 
+    const dsn = 'mysql:host='.self::host.'; port='.self::port.';dbname='.self::db.'';
+    const options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+    ];
+    //----------------------------------------------------------------------------------
     // TODO Add a way to handles calls to the DB; maybe by using SQL script?
     // 
     /**
@@ -32,12 +49,29 @@ class InfluencerManagementController extends AbstractController
      */
     public function influencer()
     {
-        $id=5;
+        $PDO = new PDO(self::dsn, self::user, self::pass, self::options);
+        $k=$PDO->query(`SELECT COUNT(user_id) FROM user_role WHERE role_id=3`);
+
+        
         $user1= new User();
-        dump($user1);
-        $user1= $this->getDoctrine()->getRepository(User::class)->find($id);
-        dump($user1);
-        return $this->render('influencerManagement/index.html.twig', ['user1'=>$user1->getEmail()] );
+        $userid[]=0;
+
+        $stmt = $PDO->prepare(`SELECT user_id FROM user_role WHERE role_id=3`);
+        //return a arry of user_id where role==3
+        //basically return all influencer
+        $stmt->execute();
+
+
+        
+        $userid = $stmt->fetchAll();
+        do{
+        //here extract info from Doctrine
+        $user1= $this->getDoctrine()->getRepository(User::class)->find($userid($k));
+        $users =[];
+        $users[]=$user1;
+        $k--;
+        } while($k!=0);
+        return $this->render('influencerManagement/index.html.twig', ['users'=>$users] );
     }
 
     //TODO check if this could be integrated into influencerView instead, as a "pop-up" or a subpage
