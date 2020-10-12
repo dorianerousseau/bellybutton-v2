@@ -24,8 +24,8 @@ class InfluencerManagementController extends AbstractController
     const host = '127.0.0.1';
     const port = '3306';
     const db   = 'bellybutton';
-    const user = 'root';
-    const pass = '';
+    const user = 'belly';
+    const pass = 'belly1234&';
     const charset = 'utf8';
 
     const dsn = 'mysql:host='.self::host.'; port='.self::port.';dbname='.self::db.'';
@@ -49,24 +49,21 @@ class InfluencerManagementController extends AbstractController
      */
     public function influencer()
     {
+        //creating new PDO fill with const parameters
         $PDO = new PDO(self::dsn, self::user, self::pass, self::options);
-        $k=$PDO->query(`SELECT COUNT(user_id) FROM user_role WHERE role_id=3`);
-
-        
+        //Query the number of user who is an influencer to populate $k and fill the do...while loop after
+        $k=$PDO->query("SELECT * FROM user_role WHERE role_id=3")->columnCount();
         $user1= new User();
-        $userid[]=0;
-
-        $stmt = $PDO->prepare(`SELECT user_id FROM user_role WHERE role_id=3`);
-        //return a arry of user_id where role==3
+        //return a array of user_id where role==3
         //basically return all influencer
-        $stmt->execute();
+        $stmt = $PDO->prepare("SELECT user_id FROM user_role WHERE role_id=3");
 
-
-        
-        $userid = $stmt->fetchAll();
+        //FIXME this doesn't work; array of userid is not copied (Notice: undefined offset: 2)
+        $usersid[] = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
         do{
+        $userid=(string)$usersid[(string)$k];
         //here extract info from Doctrine
-        $user1= $this->getDoctrine()->getRepository(User::class)->find($userid($k));
+        $user1= $this->getDoctrine()->getRepository(User::class)->find((string)$userid);
         $users =[];
         $users[]=$user1;
         $k--;
