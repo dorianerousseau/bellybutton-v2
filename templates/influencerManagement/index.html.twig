@@ -19,6 +19,7 @@ Comment: This file is the template to the homepage of the influencer management 
         <!--TODO check style-->
         <table align="center" style="width: 100px;">
           <tbody>
+            <!--TODO check how to break loop (look into the controller)-->
             {% set k = loop.index0 %}
             <tr>
               <td> {{ users[k].getLastname() }}</br></td>
@@ -28,14 +29,13 @@ Comment: This file is the template to the homepage of the influencer management 
               <td> {{ users[k].getIdFacebook() }}</br></td>
               <td> {{ users[k].getIdYoutube() }}</br></td>
               <td> {{ users[k].getIdSnapchat() }}</br></td> 
-              <td> {{ users[k].getidAgency() }}</br></td>
               <td> {{ Agency[k].getnameAgency() }}</br></td>           
             </tr>
-          </tbody>
+            
+            </tbody>
         </table>
         {% endfor %}
       </div>
-
     </main>
   </div>
 </div>

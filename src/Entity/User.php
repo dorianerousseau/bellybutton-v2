@@ -145,6 +145,7 @@ class User implements UserInterface
      // TODO add Description column to handle the description of influencers into presentations
      // TODO add Column for handling PATH to pictures==> See with @benlac on how to store it
      // TODO Add a numberOpéBB column ==> SELECT SUM on campaign_user
+     // TODO add a Age column (maybe add it to inscription tab) 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */

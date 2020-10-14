@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+//TODO check if adding App\Entity\InfluencerManagement\Agency works
 use App\Entity\Agency;
 use PDO;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,6 +46,9 @@ class InfluencerManagementController extends AbstractController
     {
         return $this->render('influencerManagement/add.html.twig');
     }
+    /**
+     * List all the influencer (Role==3 in the Database) in the \templates\influencerManagement\index.html.twig page
+     */
     /**
      * @Route("InfluencerMangement/influencerView", name="influencerView")
      */
@@ -133,12 +137,25 @@ class InfluencerManagementController extends AbstractController
         $PDO=null;
         return $stmt;
     }
-
+    /**
+     * Retrieve the Agency object of the userid passed in parameter
+     * @param $userid: the userid of the user that you want to retrieve the Agency
+     * @return $AgencyN: if the querying is null; return an Agency Object with "Sans Agence" as Agency Name
+     * @return $Agency: if there is an Agency in the DataBase, return an Agency Object filled with information from the Agency Table 
+     */
     private function getAgency(string $userid)
     {
         $idAgency=$this->getDoctrine()->getRepository(User::class)->find($userid)->getidAgency();
+        
         $Agency=$this->getDoctrine()->getRepository(Agency::class)->find($idAgency);
+        if ($Agency==null)
+        {
+            $AgencyN=new Agency();
+            return $AgencyN->setnameAgency("Sans Agence");
+        }
+        else{
         return $Agency;
+        }
     
     }
 }
