@@ -14,14 +14,13 @@ Comment: This file is the template to the homepage of the influencer management 
   <div class="influencerManagement">
     <h1>this is a test</h1>
     <main>
-      <!-- //TODO need a php loop to fill the table-->
-      <!-- //TODO This is an example table for testing purpose; i need to isolate one row and use a loop to fill it for each row in the DB-->
-      <!-- //TODO Check how to do it; maybe by using a routing function and a do...while(PDO not empty); call to the DB here is a BAD IDEA -->
+      <!-- TODO adjust css for this, need to make it more visible and print on one page then display it on another behind a click --> 
+      <!-- TODO check how to display specific things like mail (add function mailto:) -->
       <div class="list_influenceur">
         {% for user in users %}
         <table style="width: 100%" border="18">
           <tbody>
-            {% set k = loop.index %}
+            {% set k = loop.index0 %}
             <tr>
               <td> {{ users[k].getEmail() }}</td>
               <td><br>

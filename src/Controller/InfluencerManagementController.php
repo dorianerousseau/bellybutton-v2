@@ -49,25 +49,31 @@ class InfluencerManagementController extends AbstractController
      */
     public function influencer()
     {
+        //TODO extract this function as another this function is just a call to print out; other function will do it
         //creating new PDO fill with const parameters
         $PDO = new PDO(self::dsn, self::user, self::pass, self::options);
-        //Query the number of user who is an influencer to populate $k and fill the do...while loop after
-        $k=$PDO->query("SELECT * FROM user_role WHERE role_id=3")->columnCount();
-        $user1= new User();
-        //return a array of user_id where role==3
-        //basically return all influencer
-        $stmt = $PDO->prepare("SELECT user_id FROM user_role WHERE role_id=3");
+        $PDO2 = new PDO(self::dsn, self::user, self::pass, self::options);
 
-        //FIXME this doesn't work; array of userid is not copied (Notice: undefined offset: 2)
-        $usersid[] = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+        //Query the number of user who is an influencer to populate $k and fill the do...while loop after
+        $k=$PDO->query("SELECT COUNT(user_id) FROM user_role WHERE role_id=3")->fetchAll(PDO::FETCH_COLUMN, 0);
+        $PDO=null;
+
+        //return a array of user_id where role==3
+        //basically return all influencer id
+        $stmt = $PDO2->query("SELECT user_id FROM user_role WHERE role_id='3'")->fetchAll(PDO::FETCH_COLUMN, 0);
+        $PDO2=null;
+
+        // initialize variables for the loop
+        $i=$k[0]-1;
+        $j=0;
+
+        // Loop to extract info of every influencer based on their id
         do{
-        $userid=(string)$usersid[(string)$k];
-        //here extract info from Doctrine
-        $user1= $this->getDoctrine()->getRepository(User::class)->find((string)$userid);
-        $users =[];
-        $users[]=$user1;
-        $k--;
-        } while($k!=0);
+        //here extract info from Doctrine to populate the template; $stmt holds all the id; $j act as a key tha move by ++ each loop
+        $users[]= $this->getDoctrine()->getRepository(User::class)->find(($stmt[$j]));
+        $i--;
+        $j++;
+        }while($i>=0);
         return $this->render('influencerManagement/index.html.twig', ['users'=>$users] );
     }
 
