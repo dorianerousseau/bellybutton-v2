@@ -143,7 +143,7 @@ class User implements UserInterface
      */
     private $infoContact;
      // TODO add Description column to handle the description of influencers into presentations
-     // TODO add Column for handling PATH to pictures==> See with Bren on how to store it
+     // TODO add Column for handling PATH to pictures==> See with @benlac on how to store it
      // TODO Add a numberOpéBB column ==> SELECT SUM on campaign_user
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -445,6 +445,17 @@ class User implements UserInterface
             $this->campaigns->removeElement($campaign);
             $campaign->removeUser($this);
         }
+
+        return $this;
+    }
+
+    public function getidAgency()
+    {
+        return $this->idAgency;
+    }
+    public function setidAgency($idAgency)
+    {
+        $this->idAgency = $idAgency;
 
         return $this;
     }

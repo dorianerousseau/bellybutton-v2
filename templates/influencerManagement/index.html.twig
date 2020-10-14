@@ -14,35 +14,22 @@ Comment: This file is the template to the homepage of the influencer management 
   <div class="influencerManagement">
     <h1>this is a test</h1>
     <main>
-      <!-- TODO adjust css for this, need to make it more visible and print on one page then display it on another behind a click --> 
-      <!-- TODO check how to display specific things like mail (add function mailto:) -->
       <div class="list_influenceur">
         {% for user in users %}
-        <table style="width: 100%" border="18">
+        <!--TODO check style-->
+        <table align="center" style="width: 100px;">
           <tbody>
             {% set k = loop.index0 %}
             <tr>
-              <td> {{ users[k].getEmail() }}</td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-            </tr>
-            <tr>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-            </tr>
-            <tr>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
-              <td><br>
-              </td>
+              <td> {{ users[k].getLastname() }}</br></td>
+              <td> {{ users[k].getFirstname() }}</br></td>
+              <td> {{ users[k].getEmail() }}</br></td>
+              <td> {{ users[k].getIdInstagram() }}</br></td>
+              <td> {{ users[k].getIdFacebook() }}</br></td>
+              <td> {{ users[k].getIdYoutube() }}</br></td>
+              <td> {{ users[k].getIdSnapchat() }}</br></td> 
+              <td> {{ users[k].getidAgency() }}</br></td>
+              <td> {{ Agency[k].getnameAgency() }}</br></td>           
             </tr>
           </tbody>
         </table>

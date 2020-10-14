@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Agency;
 use PDO;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,7 +20,7 @@ class InfluencerManagementController extends AbstractController
     //TODO figure out the service runner for TK; IG and TW (YT seems implemented) ==> Maybe implement a meta-runner?
    
 
-    //FIXME issue with access right on the DATBASE; check doctrine Coonfig to fix it
+    // TODO insert special user to the DB here
     //Constant for PDO
     const host = '127.0.0.1';
     const port = '3306';
@@ -47,22 +48,15 @@ class InfluencerManagementController extends AbstractController
     /**
      * @Route("InfluencerMangement/influencerView", name="influencerView")
      */
-    public function influencer()
+    public function influencerView()
     {
-        //TODO extract this function as another this function is just a call to print out; other function will do it
-        //creating new PDO fill with const parameters
-        $PDO = new PDO(self::dsn, self::user, self::pass, self::options);
-        $PDO2 = new PDO(self::dsn, self::user, self::pass, self::options);
-
         //Query the number of user who is an influencer to populate $k and fill the do...while loop after
-        $k=$PDO->query("SELECT COUNT(user_id) FROM user_role WHERE role_id=3")->fetchAll(PDO::FETCH_COLUMN, 0);
-        $PDO=null;
-
+        $k=$this->extractColumnDB("SELECT COUNT(user_id) FROM user_role WHERE role_id=3", 0);
+        
         //return a array of user_id where role==3
         //basically return all influencer id
-        $stmt = $PDO2->query("SELECT user_id FROM user_role WHERE role_id='3'")->fetchAll(PDO::FETCH_COLUMN, 0);
-        $PDO2=null;
-
+        $stmt = $this->extractColumnDB("SELECT user_id FROM user_role WHERE role_id='3'", 0);
+        
         // initialize variables for the loop
         $i=$k[0]-1;
         $j=0;
@@ -71,10 +65,12 @@ class InfluencerManagementController extends AbstractController
         do{
         //here extract info from Doctrine to populate the template; $stmt holds all the id; $j act as a key tha move by ++ each loop
         $users[]= $this->getDoctrine()->getRepository(User::class)->find(($stmt[$j]));
+        $Agency[]= $this->getAgency($stmt[$j]);
         $i--;
         $j++;
         }while($i>=0);
-        return $this->render('influencerManagement/index.html.twig', ['users'=>$users] );
+        return $this->render('influencerManagement/index.html.twig', ['users'=>$users,
+                                                                      'Agency'=>$Agency ] );
     }
 
     //TODO check if this could be integrated into influencerView instead, as a "pop-up" or a subpage
@@ -120,5 +116,29 @@ class InfluencerManagementController extends AbstractController
     public function deleteAgency()
     {
         return $this-> render('influencerManagement/deleteAgency.html.twig');
+    }
+    //---------------------------------------------------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------------------------------------------
+   /**
+    * Send a query to the database and extact a single column
+    * @param $SQL: The SQL query
+    * @param $numColumn: return this column in the array (start at zero)
+    *
+    * @return $stmt: a array of all row of the specified column in $numColumn
+    */
+    private function extractColumnDB(string $SQL, int $numColumn)
+    {
+        $PDO = new PDO(self::dsn, self::user, self::pass, self::options);
+        $stmt=$PDO->query($SQL)->fetchAll(PDO::FETCH_COLUMN, $numColumn);
+        $PDO=null;
+        return $stmt;
+    }
+
+    private function getAgency(string $userid)
+    {
+        $idAgency=$this->getDoctrine()->getRepository(User::class)->find($userid)->getidAgency();
+        $Agency=$this->getDoctrine()->getRepository(Agency::class)->find($idAgency);
+        return $Agency;
+    
     }
 }
