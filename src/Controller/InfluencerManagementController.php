@@ -10,7 +10,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 //TODO check if adding App\Entity\InfluencerManagement\Agency works
-use App\Entity\Agency;
+use App\Entity\InfluenceurManagement\Agency;
 use PDO;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;

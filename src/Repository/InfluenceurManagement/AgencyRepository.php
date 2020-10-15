@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Agency;
+use App\Entity\InfluenceurManagement\Agency;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
