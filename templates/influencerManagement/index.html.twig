@@ -6,38 +6,68 @@ Comment: This file is the template to the homepage of the influencer management 
 #}
 
 {% extends 'main/base.html.twig' %}
-{% block title %} Influenceur Management {% endblock %}
+
+{% block title %}
+
+Influenceur Management
+
+{% endblock %}
 
 {% block body %}
 
+<head>
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      padding: 0px;
+      border-spacing: 0px;
+    }
+  </style>
+</head>
+
 <div>
-  <div class="influencerManagement">
+  <div>
     <h1>this is a test</h1>
     <main>
-      <div class="list_influenceur">
-        {% for user in users %}
-        <!--TODO check style-->
-        <table align="center" style="width: 100px;">
+      <div>
+        <table style="border: 1px solid black; padding:10px; border-spacing:20px">
+          <thead>
+            <tr>
+              <th>Photo</th>
+              <th>Nom </th>
+              <th>Prénom </th>
+              <th>Email </th>
+              <th>Instagram </th>
+              <th>Facebook </th>
+              <th>Youtube </th>
+              <th>Snapchat </th>
+              <th>Agence </th>
+            </tr>
+          </thead>
+          {% for user in users %}
+          {% set k = loop.index0 %}
           <tbody>
             <!--TODO check how to break loop (look into the controller)-->
-            {% set k = loop.index0 %}
             <tr>
-              <td> {{ users[k].getLastname() }}</br></td>
-              <td> {{ users[k].getFirstname() }}</br></td>
-              <td> {{ users[k].getEmail() }}</br></td>
-              <td> {{ users[k].getIdInstagram() }}</br></td>
-              <td> {{ users[k].getIdFacebook() }}</br></td>
-              <td> {{ users[k].getIdYoutube() }}</br></td>
-              <td> {{ users[k].getIdSnapchat() }}</br></td> 
-              <td> {{ Agency[k].getnameAgency() }}</br></td>           
+              <!-- TODO check the issue with images-->
+              <td><img src="E:\Stage_BellyButton\BellyButtonV2\bellybutton-v2\assets\images\Influencer\about.jpg"
+                  alt="Display influencer miniature"></td>
+              <td><a href=selectInfluencer( {{ users|k].getId() }} )> {{ users[k].getLastname() }} </a></br></td>
+              <td> {{ users[k].getFirstname() }} </br></td>
+              <td> <a href="mailto:{{ users[k].getEmail() }}"> {{ users[k].getEmail() }} </a> </br></td>
+              <td> {{ users[k].getIdInstagram() }} </br></td>
+              <td> {{ users[k].getIdFacebook() }} </br></td>
+              <td> {{ users[k].getIdYoutube() }} </br></td>
+              <td> {{ users[k].getIdSnapchat() }} </br></td>
+              <td> {{ Agency[k].getnameAgency() }} </br></td>
             </tr>
-            
-            </tbody>
+          </tbody>
+          {% endfor %}
         </table>
-        {% endfor %}
       </div>
     </main>
   </div>
 </div>
-
 {% endblock body %}

@@ -49,4 +49,81 @@ class StatsTK
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
+
+    public function getIdStatsTK(): ?int
+    {
+        return $this->idStatsTK;
+    }
+
+    public function getNbrLikeTK(): ?int
+    {
+        return $this->nbrLikeTK;
+    }
+
+    public function setNbrLikeTK(?int $nbrLikeTK): self
+    {
+        $this->nbrLikeTK = $nbrLikeTK;
+
+        return $this;
+    }
+
+    public function getNbrAboTK(): ?int
+    {
+        return $this->nbrAboTK;
+    }
+
+    public function setNbrAboTK(?int $nbrAboTK): self
+    {
+        $this->nbrAboTK = $nbrAboTK;
+
+        return $this;
+    }
+
+    public function getNbrComsTK(): ?int
+    {
+        return $this->nbrComsTK;
+    }
+
+    public function setNbrComsTK(?int $nbrComsTK): self
+    {
+        $this->nbrComsTK = $nbrComsTK;
+
+        return $this;
+    }
+
+    public function getNbrVuesTK(): ?int
+    {
+        return $this->nbrVuesTK;
+    }
+
+    public function setNbrVuesTK(?int $nbrVuesTK): self
+    {
+        $this->nbrVuesTK = $nbrVuesTK;
+
+        return $this;
+    }
+
+    public function getIdAudience(): ?int
+    {
+        return $this->idAudience;
+    }
+
+    public function setIdAudience(int $idAudience): self
+    {
+        $this->idAudience = $idAudience;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
 }

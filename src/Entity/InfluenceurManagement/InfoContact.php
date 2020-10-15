@@ -113,4 +113,14 @@ class infoContact
         $this->commentary =$commentary;
         return $this;
     }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getPreferedContact(): ?string
+    {
+        return $this->preferedContact;
+    }
 }

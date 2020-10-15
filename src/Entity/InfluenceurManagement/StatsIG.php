@@ -49,4 +49,69 @@ class StatsIG
 
     //Constructors
 
+
+    public function getIdStatsIG(): ?int
+    {
+        return $this->idStatsIG;
+    }
+
+    public function getLikeIG(): ?int
+    {
+        return $this->likeIG;
+    }
+
+    public function setLikeIG(?int $likeIG): self
+    {
+        $this->likeIG = $likeIG;
+
+        return $this;
+    }
+
+    public function getNbrComsIG(): ?int
+    {
+        return $this->nbrComsIG;
+    }
+
+    public function setNbrComsIG(?int $nbrComsIG): self
+    {
+        $this->nbrComsIG = $nbrComsIG;
+
+        return $this;
+    }
+
+    public function getNbrAboIG(): ?int
+    {
+        return $this->nbrAboIG;
+    }
+
+    public function setNbrAboIG(?int $nbrAboIG): self
+    {
+        $this->nbrAboIG = $nbrAboIG;
+
+        return $this;
+    }
+
+    public function getIdAudience(): ?int
+    {
+        return $this->idAudience;
+    }
+
+    public function setIdAudience(int $idAudience): self
+    {
+        $this->idAudience = $idAudience;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
 }

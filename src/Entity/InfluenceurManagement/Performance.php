@@ -135,4 +135,57 @@ class Performance
     return $this;
   }
 
+  public function getIdUser(): ?int
+  {
+      return $this->idUser;
+  }
+
+  public function getIdStatsYT(): ?int
+  {
+      return $this->idStatsYT;
+  }
+
+  public function setIdStatsYT(?int $idStatsYT): self
+  {
+      $this->idStatsYT = $idStatsYT;
+
+      return $this;
+  }
+
+  public function getIdStatsIG(): ?int
+  {
+      return $this->idStatsIG;
+  }
+
+  public function setIdStatsIG(?int $idStatsIG): self
+  {
+      $this->idStatsIG = $idStatsIG;
+
+      return $this;
+  }
+
+  public function getIdStatsTW(): ?int
+  {
+      return $this->idStatsTW;
+  }
+
+  public function setIdStatsTW(?int $idStatsTW): self
+  {
+      $this->idStatsTW = $idStatsTW;
+
+      return $this;
+  }
+
+  public function getIdStatsTK(): ?int
+  {
+      return $this->idStatsTK;
+  }
+
+  public function setIdStatsTK(?int $idStatsTK): self
+  {
+      $this->idStatsTK = $idStatsTK;
+
+      return $this;
+  }
+
 }

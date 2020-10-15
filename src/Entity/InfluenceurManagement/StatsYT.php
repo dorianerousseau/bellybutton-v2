@@ -65,4 +65,129 @@ class StatsYT
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
+
+    public function getIdStatsYT(): ?int
+    {
+        return $this->idStatsYT;
+    }
+
+    public function getEstimationsYT(): ?int
+    {
+        return $this->EstimationsYT;
+    }
+
+    public function setEstimationsYT(?int $EstimationsYT): self
+    {
+        $this->EstimationsYT = $EstimationsYT;
+
+        return $this;
+    }
+
+    public function getLikeYT(): ?int
+    {
+        return $this->likeYT;
+    }
+
+    public function setLikeYT(?int $likeYT): self
+    {
+        $this->likeYT = $likeYT;
+
+        return $this;
+    }
+
+    public function getDislikeYT(): ?int
+    {
+        return $this->dislikeYT;
+    }
+
+    public function setDislikeYT(?int $dislikeYT): self
+    {
+        $this->dislikeYT = $dislikeYT;
+
+        return $this;
+    }
+
+    public function getViewYT(): ?int
+    {
+        return $this->viewYT;
+    }
+
+    public function setViewYT(?int $viewYT): self
+    {
+        $this->viewYT = $viewYT;
+
+        return $this;
+    }
+
+    public function getNbVid7YT(): ?int
+    {
+        return $this->nbVid7YT;
+    }
+
+    public function setNbVid7YT(?int $nbVid7YT): self
+    {
+        $this->nbVid7YT = $nbVid7YT;
+
+        return $this;
+    }
+
+    public function getNbVid37YT(): ?int
+    {
+        return $this->nbVid37YT;
+    }
+
+    public function setNbVid37YT(?int $nbVid37YT): self
+    {
+        $this->nbVid37YT = $nbVid37YT;
+
+        return $this;
+    }
+
+    public function getNbAboYT(): ?int
+    {
+        return $this->nbAboYT;
+    }
+
+    public function setNbAboYT(?int $nbAboYT): self
+    {
+        $this->nbAboYT = $nbAboYT;
+
+        return $this;
+    }
+
+    public function getNbComsYT(): ?int
+    {
+        return $this->nbComsYT;
+    }
+
+    public function setNbComsYT(?int $nbComsYT): self
+    {
+        $this->nbComsYT = $nbComsYT;
+
+        return $this;
+    }
+
+    public function getIdAudience(): ?int
+    {
+        return $this->idAudience;
+    }
+
+    public function setIdAudience(int $idAudience): self
+    {
+        $this->idAudience = $idAudience;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
 }

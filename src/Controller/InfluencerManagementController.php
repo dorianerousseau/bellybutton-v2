@@ -9,7 +9,6 @@
 namespace App\Controller;
 
 use App\Entity\User;
-//TODO check if adding App\Entity\InfluencerManagement\Agency works
 use App\Entity\InfluenceurManagement\Agency;
 use PDO;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -50,7 +49,7 @@ class InfluencerManagementController extends AbstractController
      * List all the influencer (Role==3 in the Database) in the \templates\influencerManagement\index.html.twig page
      */
     /**
-     * @Route("InfluencerMangement/influencerView", name="influencerView")
+     * @Route("InfluencerManagement/influencerView", name="influencerView")
      */
     public function influencerView()
     {
@@ -77,7 +76,7 @@ class InfluencerManagementController extends AbstractController
                                                                       'Agency'=>$Agency ] );
     }
 
-    //TODO check if this could be integrated into influencerView instead, as a "pop-up" or a subpage
+    //TODO check if this could be integrated into influencerView instead, as a "pop-up" or a subpage (iframe)
     /**
      * @Route("InfluencerManagement/delete", name="deleteInfluencer")
      */
@@ -86,7 +85,7 @@ class InfluencerManagementController extends AbstractController
         return $this->render('influencerManagement/remove.html.twig');
     }
 
-    // TODO make this as a "pop-up" or a subpage?
+    // TODO make this as a "pop-up" or a subpage? (iframe?)
     /**
      * @Route("InfluencerManagement/modif", name="modifInfluencer")
      */

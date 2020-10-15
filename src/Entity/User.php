@@ -472,4 +472,28 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getCommentary(): ?string
+    {
+        return $this->commentary;
+    }
+
+    public function setCommentary(?string $commentary): self
+    {
+        $this->commentary = $commentary;
+
+        return $this;
+    }
+
+    public function getInfoContact(): ?int
+    {
+        return $this->infoContact;
+    }
+
+    public function setInfoContact(?int $infoContact): self
+    {
+        $this->infoContact = $infoContact;
+
+        return $this;
+    }
 }

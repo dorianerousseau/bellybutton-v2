@@ -204,4 +204,9 @@ class AudienceType
       $this->more45 = $more45;
       return $this;
    }
+
+   public function getIdAudience(): ?int
+   {
+       return $this->idAudience;
+   }
 }

@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\InfluenceurManagement\AgencyRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\AgencyRepository")
  * @UniqueEntity("nameAgency")
  */
 class Agency
@@ -94,6 +94,59 @@ class Agency
     public function setcommentary(string $commentary)
     {
         $this->commentary = $commentary;
+        return $this;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(int $user_id): self
+    {
+        $this->user_id = $user_id;
+
+        return $this;
+    }
+
+    public function getIdDefaultContact(): ?int
+    {
+        return $this->idDefaultContact;
+    }
+
+    public function setIdDefaultContact(int $idDefaultContact): self
+    {
+        $this->idDefaultContact = $idDefaultContact;
+
+        return $this;
+    }
+
+    public function getIdContact(): ?int
+    {
+        return $this->idContact;
+    }
+
+    public function setIdContact(?int $idContact): self
+    {
+        $this->idContact = $idContact;
+
+        return $this;
+    }
+
+    public function getNameSpecialContact(): ?string
+    {
+        return $this->NameSpecialContact;
+    }
+
+    public function setNameSpecialContact(?string $NameSpecialContact): self
+    {
+        $this->NameSpecialContact = $NameSpecialContact;
+
         return $this;
     }
 
