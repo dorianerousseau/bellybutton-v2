@@ -98,9 +98,10 @@ class InfluencerManagementController extends AbstractController
     /**
      * @Route("InfluencerManagement/select", name="selectInfluencer")
      */
-    public function selectInfluencer()
+    public function selectInfluencer(int $userId)
     {
-        return $this-> render('influencerManagement/select.html.twig');
+       $user= $this->getDoctrine()->getRepository(User::class)->find($userId);
+        return $this-> render('influencerManagement/select.html.twig',['user'=>$user]);
     }
     
     //---------------------------------------------------------------------------------------------------------------------------------
