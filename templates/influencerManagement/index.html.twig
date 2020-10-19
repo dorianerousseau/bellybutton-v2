@@ -29,7 +29,7 @@ Influenceur Management
 
 <div>
   <div>
-    <h1>Influenceur Management</h1>
+    <h1 style="text-align:center;">Influenceur Management</h1>
     <main>
       <div>
         <table>
@@ -51,10 +51,11 @@ Influenceur Management
           <tbody>
             <!--TODO check how to break loop (look into the controller)-->
             <tr>
-              <!-- TODO check the issue with images ..\..\..\assets\images\Influencer\about.jpg -->
+              <!-- FIXME check the issue with images ..\..\..\assets\images\Influencer\about.jpg -->
               <td> <a href="file:///E:/Stage_BellyButton/BellyButtonV2/bellybutton-v2/assets/images/Influencer/about.jpg"> <img src="E:/Stage_BellyButton/BellyButtonV2/bellybutton-v2/assets/images/Influencer/about.jpg" border=0
                   alt="Display influencer miniature" ></a> </td>
-              <td><a href=selectInfluencer({{ users[k].getId() }})> {{ users[k].getLastname() }} </a></br></td>
+                  <!--FIXME this does not redirect to selectInfuencer-->
+              <td> <a href="{{ path('selectInfluencer', {users: users[k].getId() } ) }} " > {{ users[k].getLastname() }} </a></br></td>
               <td> {{ users[k].getFirstname() }} </br></td>
               <td> <a href="mailto:{{ users[k].getEmail() }}"> {{ users[k].getEmail() }} </a> </br></td>
               <td> {{ users[k].getIdInstagram() }} </br></td>

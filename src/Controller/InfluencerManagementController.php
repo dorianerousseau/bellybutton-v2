@@ -46,7 +46,7 @@ class InfluencerManagementController extends AbstractController
         return $this->render('influencerManagement/add.html.twig');
     }
     /**
-     * List all the influencer (Role==3 in the Database) in the \templates\influencerManagement\index.html.twig page
+     * List all the influencer (Role==3 in the Database) and display it in the \templates\influencerManagement\index.html.twig page
      */
     /**
      * @Route("InfluencerManagement/influencerView", name="influencerView")
@@ -94,9 +94,9 @@ class InfluencerManagementController extends AbstractController
         return $this->render('influencerManagement/modif.html.twig');
     }
 
-    //TODO See if i can make this in pure PHP it can save me some time messing with Doctrine
+    
     /**
-     * @Route("InfluencerManagement/select", name="selectInfluencer")
+     * @Route("InfluencerManagement/select/{id<\d+>", name="selectInfluencer", methods={"GET"})
      */
     public function selectInfluencer(int $userId)
     {
