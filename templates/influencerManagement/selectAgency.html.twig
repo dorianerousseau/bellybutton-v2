@@ -1,0 +1,15 @@
+{#
+Name: selectAgency.html.twig
+Author: Flavien Macquignon
+Date: 05/10/2020
+Comment: this file is a template to display information about an Agency stored into the Bellybutton database
+#}
+
+{% extends 'main/base.html.twig' %}
+
+{% block title %} {{ Agency.getnameAgency() }} {% endblock %}
+
+{% block body %}
+<h1 style="text-align: center">{{ Agency.getnameAgency() }}</h1>
+<a href=""><button>Modifier l'agence</button></a>
+{% endblock %}

@@ -6,7 +6,7 @@
 #}
 
 {% extends 'main/base.html.twig' %}
-{% block title %} {{ user.getFirstname() }} {{ user.getLastname() }}| {{ user.getUsername() }} {% endblock %}
+{% block title %} {{ user.getFirstname() }} {{ user.getLastname() }} | {{ user.getUsername() }} {% endblock %}
 
 {% block body %}
 <head>
@@ -16,3 +16,4 @@
 <div>
     <h1> {{ user.getLastname() }} </h1>
 </div>
+{% endblock %}

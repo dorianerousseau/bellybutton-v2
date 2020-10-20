@@ -55,14 +55,14 @@ Influenceur Management
               <td> <a href="file:///E:/Stage_BellyButton/BellyButtonV2/bellybutton-v2/assets/images/Influencer/about.jpg"> <img src="E:/Stage_BellyButton/BellyButtonV2/bellybutton-v2/assets/images/Influencer/about.jpg" border=0
                   alt="Display influencer miniature" ></a> </td>
                   <!--FIXME this does not redirect to selectInfuencer-->
-              <td> <a href="{{ path('selectInfluencer', {users: users[k].getId() } ) }} " > {{ users[k].getLastname() }} </a></br></td>
-              <td> {{ users[k].getFirstname() }} </br></td>
+              <td> <a href="{{ path('selectInfluencer', {'userId':users[k].getId() } ) }} " > {{ users[k].getLastname() }} </a> </br> </td>
+              <td> <a href="{{ path('selectInfluencer', {'userId':users[k].getId() } ) }} "> {{ users[k].getFirstname() }} </a> </br> </td>
               <td> <a href="mailto:{{ users[k].getEmail() }}"> {{ users[k].getEmail() }} </a> </br></td>
-              <td> {{ users[k].getIdInstagram() }} </br></td>
-              <td> {{ users[k].getIdFacebook() }} </br></td>
-              <td> {{ users[k].getIdYoutube() }} </br></td>
-              <td> {{ users[k].getIdSnapchat() }} </br></td>
-              <td> {{ Agency[k].getnameAgency() }} </br></td>
+              <td> <a href="http://instagram.com/{{ users[k].getIdInstagram() }}"> {{ users[k].getIdInstagram() }}</a>  </br></td>
+              <td> <a href="http://facebook.com/{{ users[k].getIdFacebook() }}">  {{ users[k].getIdFacebook() }}</a> </br></td>
+              <td> <a href="http://youtube.com/c/{{users[k].getIdYoutube() }}"> {{ users[k].getIdYoutube() }} </a></br></td>
+              <td> <a href="http://story.snapchat.com/s/{{ users[k].getIdSnapchat() }}">{{ users[k].getIdSnapchat() }}</a> </br></td>
+              <td> <a href="{{path ('selectAgency', {agencyId: Agency[k].getnameAgency()} ) }}"> {{ Agency[k].getnameAgency() }}</a> </br></td>
             </tr>
           </tbody>
           {% endfor %}

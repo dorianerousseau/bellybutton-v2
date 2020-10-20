@@ -43,7 +43,18 @@ class InfluencerManagementController extends AbstractController
      */
     public function addInfluencer()
     {
-        return $this->render('influencerManagement/add.html.twig');
+        //This organisation is similar as the one in influencerView() below check-it out for more info
+        //This is needed to return every Agency in the Database
+        $k=$this->extractColumnDB("SELECT COUNT(id) FROM agency", 0);
+        $stmt=$this->extractColumnDB("SELECT id FROM agency", 0);
+        $i=$k[0]-1;
+        $j=0;
+        do{
+            $agency[]=$this->getDoctrine()->getRepository(Agency::class)->find(($stmt[$j]));
+            $i--;
+            $j++;
+        }while($i>0);
+        return $this->render('influencerManagement/add.html.twig', ['Agencys'=>$agency]);
     }
     /**
      * List all the influencer (Role==3 in the Database) and display it in the \templates\influencerManagement\index.html.twig page
@@ -96,7 +107,7 @@ class InfluencerManagementController extends AbstractController
 
     
     /**
-     * @Route("InfluencerManagement/select/{id<\d+>", name="selectInfluencer", methods={"GET"})
+     * @Route("InfluencerManagement/select?user={userId}", name="selectInfluencer")
      */
     public function selectInfluencer(int $userId)
     {
@@ -111,13 +122,35 @@ class InfluencerManagementController extends AbstractController
     {
         return $this-> render('influencerManagement/addAgency.html.twig');
     }
+    /**
+     * @Route("InfluencerManagement/select?agency={agencyId}", name="selectAgency")
+     */
+    public function selectAgency($agencyId)
+    {
+        if($agencyId=="Sans Agence")
+        {
+            return $this->influencerView();
+        }
+        else{
+            //extract the id of the agency using a SQL query
+            $agency=$this->extractColumnDB("SELECT id FROM agency WHERE name_agency='".$agencyId."'", 0);
+            //use the agencyId to extract an Agency object
+            $Agency = $this->getDoctrine()->getRepository(Agency::class)->find($agency[0]);
+            
+            return $this-> render('influencerManagement/selectAgency.html.twig',['Agency'=>$Agency]);
+        }
+
+    }
+    /**
+     * @Route("InfluencerManagement/modif?agency={agencyId}, name="modifAgency")
+     */
      //TODO check if this could be integrated into influencerView instead, as a "pop-up" or a subpage
-    public function modifAgency()
+    public function modifAgency($idAgency)
     {
         return $this-> render('influencerManagement/modifAgency.html.twig');
     }
      //TODO check if this could be integrated into influencerView instead, as a "pop-up" or a subpage
-    public function deleteAgency()
+    public function deleteAgency($idAgency)
     {
         return $this-> render('influencerManagement/deleteAgency.html.twig');
     }
