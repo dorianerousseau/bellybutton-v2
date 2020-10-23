@@ -9,11 +9,143 @@
 {% block title %} {{ user.getFirstname() }} {{ user.getLastname() }} | {{ user.getUsername() }} {% endblock %}
 
 {% block body %}
-<head>
-
-</head>
-
+<!-- TODO All values must be set into champs and champs must be locked(==>https://html.com/attributes/input-disabled/)-->
+<!-- TODO Send a User, a Agency, a Performance, a Stats (based on null) and a catAudience object from the controller-->
+<!-- TODO Build a "dashboard" to receive theses objects-->
+<!-- TODO create a "Compte crée chez BB; cliquez ici pour réinitialiser le mot de passe" afin d'éviter le cas où l'user est déjà présent-->
 <div>
     <h1> {{ user.getLastname() }} </h1>
+</div>
+<label form="lname">Nom: </label>
+<input type="text" id="lname" name="lname" autofocus="true" placeholder="Nom" value="{{ user.getLastname() }}" required><br>
+
+<label form="fname">Prénom: </label>
+<input type="text" id="fname" name="fname" placeholder="Prénom" required><br>
+{# TODO just display the picture_small here #}
+<aside>
+    <label form="picture_small">Miniature:</label>
+    <input type="file" id="picture_small" name="picture_small" accept="image/jpeg, image/png" required><br>
+
+    <label form="picture_large">Grand Format:</label>
+    <input type="file" id="picture_large" name="picture_large" accept="image/jpeg, image/png" required><br>
+
+</aside>
+
+<label form="email">Email: </label>
+<input type="email" id "email" name="email" placeholder="adressepro@pro.com" required><br>
+
+<!-- This regex pattern seems to match any phone number; to check on usage-->
+<label form="phone">Téléphone: </label>
+<input type="tel" id="phone" name="phone" pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"
+    placeholder="1234567890" required><br> <br>
+<aside>
+</aside>
+
+<label form="adress">Adresse Postale</label>
+<textarea id="adress" name="adress" rows="2" cols="40" maxlength="500"
+    placeholder="1 Rue des pros 75000 Paris"></textarea><br>
+
+<aside>
+    <label form="agency">Agence :</label>
+    <select name="Agency" id="Agency">
+
+    <!--TODO Make a switch statement to select the right sector-->
+    {% switch  %}
+
+    {% case "text" %}
+
+        {{ matrixBlock.textField | markdown }}
+
+    {% case "image" %}
+
+        {{ matrixBlock.image[0].getImg() }}
+
+    {% default %}
+
+        <p>A font walks into a bar.</p>
+        <p>The bartender says, “Hey, we don’t serve your type in here!”</p>
+
+{% endswitch %}
+
+    </select>
+    <!-- WARN Theses sector are stored in the DataBase by their values instead of their labels-->
+    <label form="Secteurs BB">Secteurs BB: </label>
+    <select name="Secteur_BB" id="SectorBB" required>
+        <option value="0">Auto</option>
+        <option value="1">Agriculture</option>
+        <option value="2">ASMR</option>
+        <option value="3">Art</option>
+        <option value="4">Beauté</option>
+        <option value="5">Cinéma</option>
+        <option value="6">Divertissement</option>
+        <option value="7">Deco</option>
+        <option value="8">Développement</option>
+        <option value="9">Espace</option>
+        <option value="10">Famille</option>
+        <option value="11">Food</option>
+        <option value="12">Foot</option>
+        <option value="13">Gaming</option>
+        <option value="14">Histoire</option>
+        <option value="15">Home</option>
+        <option value="16">Humour</option>
+        <option value="17">Lifestyle</option>
+        <option value="18">Manga</option>
+        <option value="19">Musique</option>
+        <option value="20">Mode</option>
+        <option value="21">Pêche</option>
+        <option value="22">Sport</option>
+        <option value="23">Science</option>
+        <option value="24">Tech</option>
+        <option value="25">Voyage</option>
+    </select> <br> <br>
+
+    <!-- TODO Switch statement here too-->
+    <label form="catAudience">Catégories d'Audience BellyButton</label>
+    <select>
+        <option value="10">Aucun</option>
+        <option value="11">G (0-50K)</option>
+        <option value="12">F (50K-150K)</option>
+        <option value="13">E (150K-250K)</option>
+        <option value="14">D (250K-350K)</option>
+        <option value="15">C (350K-500K)</option>
+        <option value="16">B (500K-1M)</option>
+        <option value="17">A (1M >)</option>
+    </select>
+
+</aside>
+<div>
+    <label form="urlYT">URL de la chaîne Youtube</label>
+    <input type="url" id="urlYT" name="urlYT" size="45" placeholder="http://www.youtube.com/c/NomUtilisateur"><br>
+
+    <label form="urlIG">URL de la chaîne Instagram</label>
+    <input type="url" id="urlIG" name="urlIG" size="45" placeholder="http://www.instagram.com/NomUtilisateur"><br>
+
+    <label form="urlTW">URL de la chaîne Twitch</label>
+    <input type="url" id="urlTW" name="urlTW" size="45" placeholder="http://www.twitch.tv/NomUtilisateur"><br>
+
+    <label form="urlTK">URL de le chaîne TikTok</label>
+    <input type="url" id="urlTK" name="urlTK" size="45" placeholder="https://www.tiktok.com/@NomUtilisateur">
+</div>
+<div>
+    <aside>
+        <label form="Margin">Marge Bellybutton</label>
+        <input type="number" id="Margin" name="Margin" value="25" step="0.01">
+        <br><br>
+    </aside>
+
+
+
+    <label form="Description">Description</label>
+    <textarea id="Description" name="Description" rows="2" cols="40" maxlength="500"
+        placeholder="Insérer ici la description destinée aux présentations" required></textarea>
+
+    <aside>
+        <label form="Commentaires">Commentaires</label>
+        <textarea form="Commentaires" name="Commentaires" rows="2" cols="40" maxlength"500"
+            placeholder="Insérer ici les commentaires internes à Bellybutton, ils ne seront pas diffusés dans les présentations clients"></textarea>
+    </aside>
+</div>
+</form>
+</div>
 </div>
 {% endblock %}

@@ -51,10 +51,8 @@ Influenceur Management
           <tbody>
             <!--TODO check how to break loop (look into the controller)-->
             <tr>
-              <!-- FIXME check the issue with images ..\..\..\assets\images\Influencer\about.jpg -->
-              <td> <a href="file:///E:/Stage_BellyButton/BellyButtonV2/bellybutton-v2/assets/images/Influencer/about.jpg"> <img src="E:/Stage_BellyButton/BellyButtonV2/bellybutton-v2/assets/images/Influencer/about.jpg" border=0
-                  alt="Display influencer miniature" ></a> </td>
-                  <!--FIXME this does not redirect to selectInfuencer-->
+              <!-- FIXME check the issue with images; cannot link to local harddrive; need to see this "in production" -->
+              <td> <img src="E:/Stage_BellyButton/BellyButtonV2/bellybutton-v2/assets/images/Influencer/about.jpg" alt="Display influencer miniature" /></td>
               <td> <a href="{{ path('selectInfluencer', {'userId':users[k].getId() } ) }} " > {{ users[k].getLastname() }} </a> </br> </td>
               <td> <a href="{{ path('selectInfluencer', {'userId':users[k].getId() } ) }} "> {{ users[k].getFirstname() }} </a> </br> </td>
               <td> <a href="mailto:{{ users[k].getEmail() }}"> {{ users[k].getEmail() }} </a> </br></td>

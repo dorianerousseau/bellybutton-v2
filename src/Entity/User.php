@@ -33,7 +33,7 @@ class User implements UserInterface
      * @Groups({"campaign_get", "user_logged"})
      */
     private $email;
-    
+
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
@@ -136,22 +136,26 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\InfluenceurManagement\Agency", mappedBy="user_id")
      */
     private $idAgency;
-    
+
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @ORM\OneToMany(targetEntity="App\Entity\InfluenceurManagement\InfoContact", mappedBy="id")
      */
     private $infoContact;
-     // TODO add Description column to handle the description of influencers into presentations
-     // TODO add Column for handling PATH to pictures==> See with @benlac on how to store it
-     // TODO Add a numberOpéBB column ==> SELECT SUM on campaign_user
-     // TODO add a Age column (maybe add it to inscription tab) 
+
+    //FIXME handle migration
+    /**
+     * /**
+     * @ORM\Column(type="string", length= 500, nullable=true)
+     *
+    private $descriptionPrez;*/
+
+  //TODO  Add a bool to handle if the user is created by the staff or not: if not, display a specific label if yes, display another specific label
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $resetToken;
 
-    //TODO modify the constructor to handle the extra columns
     public function __construct()
     {
         $this->userRoles = new ArrayCollection();
@@ -496,4 +500,15 @@ class User implements UserInterface
 
         return $this;
     }
+    /**
+    public function getDescriptionPrez()
+    {
+        return $this->descriptionPrez;
+    }
+    public function setDescriptionPrez(?string $descriptionPrez): self
+    {
+        $this->descriptionPrez = $descriptionPrez;
+        return $this;
+    }
+     */
 }
