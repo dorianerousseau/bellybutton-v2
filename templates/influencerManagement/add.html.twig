@@ -15,12 +15,27 @@
 {% endblock %}
 
 {% block body %}
+<div>
+    {{ form_start(Form) }}
+    {{ form_row(Form.lname, {'label': 'Nom:'}) }}
+    {{ form_row(Form.fname, {'label': 'Prénom:'}) }}
+    {{ form_row(Form.mailpro, {'label': 'Mail Professionnel:'}) }}
+    {{ form_row(Form.URLYT, {'label': 'URL Youtube:'}) }}
+    {{ form_row(Form.URLIG, { 'label': 'URL Instagram:' }) }}
+    {{ form_row(Form.URLTW, {'label':'URL Twitch:'}) }}
+    {{ form_row(Form.URLTK, {'label':'URL TikTok:'}) }}
+    {{ form_row(Form.agencyId, {'label': 'Agence:'}) }}
+    <!--TODO redirect this to path "addAgency"-->
+    <aside><a href="{{ path('addAgency') }}"><button>Ajouter une Agence</button></a></aside>
+    {{ form_row(Form.picture_small, {'label':'Miniature:'}) }}
+    {{ form_row(Form.picture_large, {'label': 'Grand Format:'}) }}
+    {{ form_row(Form.catAudience, {'label': 'Catégorie d\'Audience:'}) }}
+    {{ form_row(Form.status, {'label':'Status BB:'}) }}
+    {{ form_row(Form.Sector, {'label':'Secteur BB:'}) }}
+    {{ form_row(Form.Description, {'label':'Description des présentation:'}) }}
+    {{ form_row(Form.Commentary, {'label':'Commentaire interne:'}) }}
 
-{{ form_start(Form) }}
-{{ form_row(Form.lname, {'label': 'Nom'}) }}
-{{ form_row(Form.fname, {'label': 'Prénom'}) }}
-{{ form_row(Form.agencyId, {'label': 'agency_TEST'}) }}
-{{ form_end(Form) }}
-
+    {{ form_end(Form) }}
+</div>
 
 {% endblock %}

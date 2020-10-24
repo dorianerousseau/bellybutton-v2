@@ -61,10 +61,6 @@ class Agency
      */
     private $commentary;
 
-    // Contructors
-
-    //TODO build this constructor for PDO (https://www.php.net/manual/fr/pdo.construct.php)
-    //TODO then __construct is build, build it to all other entity
     public function getnameAgency(): ?string
     {
         return $this->nameAgency;

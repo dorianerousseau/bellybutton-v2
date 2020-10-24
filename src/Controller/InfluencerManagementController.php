@@ -52,18 +52,28 @@ class InfluencerManagementController extends AbstractController
      */
     public function addInfluencer(Request $request)
     {
+        //-----------------------------------------------
+        // Preparation to handle a drop down menu on all Agency of the Database
+        // Compteur pour arrêter la boucle
         $k=0;
-        // FIXME issue with extraction from the DB; i need an array[nomAgence=>id]
+        //Nombre d'agence dans la Base, détermine la longueur de la boucle
         $nbrAgences=$this->extractColumnDB('SELECT COUNT(id) FROM agency', 0);
+        //Extrait les id des Agences
         $Agencyid=$this->extractColumnDB('SELECT id FROM agency', 0);
+        //Extrait les noms des agences
         $AgencyName=$this->extractColumnDB('SELECT name_agency FROM agency',0);
+        //Ajoute le choix "Sans Agence" car il n'est pas présent dans la Base
         $choiceAgency=['Sans Agence'=>null];
+        //Boucle pour remplir le tableau $choiceArray avec une association 'id'=>'name_agency'
         do{
         $tempArray=[$AgencyName[$k] => $Agencyid[$k]];
         $choiceAgency=array_merge($choiceAgency, $tempArray);
         $k++;
         }while($k<$nbrAgences[0]);
         
+
+        //---------------------------------------------------------
+        //Actual form as displayed on the Page
         $add = new AddInfluencer();
         $form=$this->createFormBuilder($add)
             ->add('fname', TextType::class)
@@ -76,7 +86,7 @@ class InfluencerManagementController extends AbstractController
             ->add('agencyId', ChoiceType::class, [
                 'choices'  => $choiceAgency,
             ])
-            //TODO add picture handling
+            //WARN check if this is handled correctly
             ->add('picture_small', FileType::class)
             ->add('picture_large', FileType::class)
             ->add('catAudience', ChoiceType::class,[
@@ -91,7 +101,17 @@ class InfluencerManagementController extends AbstractController
                 'A (1M > )'=> '17']
             ])
 
-            ->add('status', IntegerType::class)
+            ->add('status', ChoiceType::class, [
+                'choices'=>[
+                    'Aucun'=>null,
+                    'To Qualify'=>'1',
+                    'Qualified'=>'2',
+                    'Open'=>'3',
+                    'OK'=>'4',
+                    //FIXME display check mark here
+                    "Check"=>'5'
+                ]
+            ])
             ->add('Sector', ChoiceType::class,[
                 'choices'=>
                 [
@@ -220,6 +240,9 @@ class InfluencerManagementController extends AbstractController
     //---------------------------------------------------------------------------------------------------------------------------------
     //TODO use iframe to render theses pages insides another as "pop-up" 
     //TODO check if this could be integrated into influencerView instead, as a "pop-up" or a subpage
+    /**
+     * @Route("InfluencerManagement/addAgency", name="addAgency")
+     */
     public function addAgency()
     {
         return $this->render('influencerManagement/addAgency.html.twig');
