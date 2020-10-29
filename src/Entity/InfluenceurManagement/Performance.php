@@ -75,6 +75,32 @@ class Performance
    */
   private $pictureSmall;
 
+  /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\InfluenceurManagement\VenteYT", inversedBy="id")
+     */
+    private $idVenteYT;
+
+      /**
+     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\InfluenceurManagement\VenteTW", inversedBy="id")
+     */
+    private $idVenteTW;
+
+      /**
+     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\InfluenceurManagement\VenteTK", inversedBy="id")
+     */
+    private $idVenteTK;
+
+      /**
+     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\InfluenceurManagement\VenteIG", inversedBy="id")
+     */
+    private $idVenteIG;
+
+
+
   public function getaudienceCategorie(): ?int
   {
     return $this->audienceCategorie;
