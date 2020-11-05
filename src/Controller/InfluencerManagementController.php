@@ -55,112 +55,147 @@ class InfluencerManagementController extends AbstractController
         //-----------------------------------------------
         // Preparation to handle a drop down menu on all Agency of the Database
         // Compteur pour arrêter la boucle
-        $k=0;
+        $k = 0;
         //Nombre d'agence dans la Base, détermine la longueur de la boucle
-        $nbrAgences=$this->extractColumnDB('SELECT COUNT(id) FROM agency', 0);
+        $nbrAgences = $this->extractColumnDB('SELECT COUNT(id) FROM agency', 0);
         //Extrait les id des Agences
-        $Agencyid=$this->extractColumnDB('SELECT id FROM agency', 0);
+        $Agencyid = $this->extractColumnDB('SELECT id FROM agency', 0);
         //Extrait les noms des agences
-        $AgencyName=$this->extractColumnDB('SELECT name_agency FROM agency',0);
+        $AgencyName = $this->extractColumnDB('SELECT name_agency FROM agency', 0);
         //Ajoute le choix "Sans Agence" car il n'est pas présent dans la Base
-        $choiceAgency=['Sans Agence'=>null];
+        $choiceAgency = ['Sans Agence' => null];
         //Boucle pour remplir le tableau $choiceArray avec une association 'id'=>'name_agency'
-        do{
-        $tempArray=[$AgencyName[$k] => $Agencyid[$k]];
-        $choiceAgency=array_merge($choiceAgency, $tempArray);
-        $k++;
-        }while($k<$nbrAgences[0]);
-        
-
+        do {
+            $tempArray = [$AgencyName[$k] => $Agencyid[$k]];
+            $choiceAgency = array_merge($choiceAgency, $tempArray);
+            $k++;
+        } while ($k < $nbrAgences[0]);
         //---------------------------------------------------------
         //Actual form as displayed on the Page
         $add = new AddInfluencer();
-        $form=$this->createFormBuilder($add)
+        $form = $this->createFormBuilder($add)
             ->add('fname', TextType::class)
             ->add('lname', TextType::class)
             ->add('mailpro', TextType::class)
-            ->add('URLYT', TextType::class)
-            ->add('URLIG', TextType::class)
-            ->add('URLTW', TextType::class)
-            ->add('URLTK', TextType::class)
+            ->add('URLYT', TextType::class, [
+                'required' => false,
+            ])
+            ->add('URLIG', TextType::class, [
+                'required' => false,
+            ])
+            ->add('URLTW', TextType::class, [
+                'required' => false,
+            ])
+            ->add('URLTK', TextType::class, [
+                'required' => false,
+            ])
             ->add('agencyId', ChoiceType::class, [
                 'choices'  => $choiceAgency,
             ])
             //WARN check if this is handled correctly
-            ->add('picture_small', FileType::class)
-            ->add('picture_large', FileType::class)
-            ->add('catAudience', ChoiceType::class,[
-               'choices'=> 
-               ['Aucune'=>"10",
-                'G (0 - 50K)' =>"11",
-                'F (50 - 150K)'=>"12",
-                'E (150 - 200K)'=>'13',
-                'D (250 - 350K)'=>'14',
-                'C (350 - 500K)'=>'15',
-                'B (500K - 1M)'=>'16',
-                'A (1M > )'=> '17']
+            ->add('picture_small', FileType::class, [
+                'required' => false,
+            ])
+            ->add('picture_large', FileType::class, [
+                'required' => false,
+            ])
+            ->add('catAudience', ChoiceType::class, [
+                'choices' =>
+                [
+                    'Aucune' => "10",
+                    'G (0 - 50K)' => "11",
+                    'F (50 - 150K)' => "12",
+                    'E (150 - 200K)' => '13',
+                    'D (250 - 350K)' => '14',
+                    'C (350 - 500K)' => '15',
+                    'B (500K - 1M)' => '16',
+                    'A (1M > )' => '17'
+                ]
             ])
 
             ->add('status', ChoiceType::class, [
-                'choices'=>[
-                    'Aucun'=>null,
-                    'To Qualify'=>'1',
-                    'Qualified'=>'2',
-                    'Open'=>'3',
-                    'OK'=>'4',
+                'choices' => [
+                    'Aucun' => null,
+                    'To Qualify' => '1',
+                    'Qualified' => '2',
+                    'Open' => '3',
+                    'OK' => '4',
                     //FIXME display check mark here
-                    "Check"=>'5'
+                    "Check" => '5'
                 ]
             ])
-            ->add('Sector', ChoiceType::class,[
-                'choices'=>
+            ->add('Sector', ChoiceType::class, [
+                'choices' =>
                 [
-                    'Auto'=>'0',
-                    'Agriculture'=>'1',
-                    'ASMR'=>'2',
-                    'Art'=>'3',
-                    'Beauté'=>'4',
-                    'Cinéma'=>'5',
-                    'Divertissement'=>'6',
-                    'Deco'=>'7',
-                    'Développement'=>'8',
-                    'Espace'=>'9',
-                    'Famille'=>'10',
-                    'Food'=>'11',
-                    'Foot'=>'12',
-                    'Gaming'=>'13',
-                    'Histoire'=>'14',
-                    'Home'=>'15',
-                    'Humour'=>'16',
-                    'Lifestyle'=>'17',
-                    'Manga'=>'18',
-                    'Musique'=>'19',
-                    'Mode'=>'20',
-                    'Pêche'=>'21',
-                    'Sport'=>'22',
-                    'Science'=>'23',
-                    'Tech'=>'24',
-                    'Voyage'=>'25'
+                    'Auto' => '0',
+                    'Agriculture' => '1',
+                    'ASMR' => '2',
+                    'Art' => '3',
+                    'Beauté' => '4',
+                    'Cinéma' => '5',
+                    'Divertissement' => '6',
+                    'Deco' => '7',
+                    'Développement' => '8',
+                    'Espace' => '9',
+                    'Famille' => '10',
+                    'Food' => '11',
+                    'Foot' => '12',
+                    'Gaming' => '13',
+                    'Histoire' => '14',
+                    'Home' => '15',
+                    'Humour' => '16',
+                    'Lifestyle' => '17',
+                    'Manga' => '18',
+                    'Musique' => '19',
+                    'Mode' => '20',
+                    'Pêche' => '21',
+                    'Sport' => '22',
+                    'Science' => '23',
+                    'Tech' => '24',
+                    'Voyage' => '25'
 
                 ]
             ])
             ->add('Description', TextType::class)
-            ->add('Commentary', TextType::class)
+            ->add('Commentary', TextType::class, [
+                'required' => false,
+            ])
             ->getForm();
 
-            $form->handleRequest($request);
-    if ($form->isSubmitted() && $form->isValid()) {
-        
-        $add = $form->getData();
-        //TODO add the influencer to the DB ==> redirect to SelectInfluencer with the specified userID
-        // ... perform some action, such as saving the task to the database
-        // for example, if Task is a Doctrine entity, save it!
-        // $entityManager = $this->getDoctrine()->getManager();
-        // $entityManager->persist($task);
-        // $entityManager->flush();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
 
-        return $this->redirectToRoute('task_success');
-    }
+            $add = $form->getData();
+            //Ce tableau doit être utilisé pour générer un formulaire afin de rentrer les informations des tables de vente
+            $URL = array(
+                'URLYT' => false,
+                'URLTW' => false,
+                'URLTK' => false,
+                'URLIG' => false
+            );
+            if ($add->getURLYT() != null) {
+                $URL['URLYT'] = true;
+            }
+            if ($add->getURLTW() != null) {
+                $URL['URLTW'] = true;
+            }
+            if ($add->getURLTK() != null) {
+                $URL['URLTK'] = true;
+            }
+            if ($add->getURLIG() != null) {
+                $URL['URLIG'] = true;
+            }
+            //TODO add the influencer to the DB and add a redirect to SelectInfluencer with the specified userID
+            // ... perform some action, such as saving the task to the database
+            // for example, if Task is a Doctrine entity, save it!
+            // $entityManager = $this->getDoctrine()->getManager();
+            // $entityManager->persist($task);
+            // $entityManager->flush();
+
+            //TODO redirect here to a vente form 
+            //this task_success must account for a full false $URL array
+            return $this->redirectToRoute('AddVente', $URL);
+        }
 
         return $this->render('influencerManagement/add.html.twig', [
             'Form' => $form->createView()
@@ -171,7 +206,15 @@ class InfluencerManagementController extends AbstractController
      * List all the influencer (Role==3 in the Database) and display it in the \templates\influencerManagement\index.html.twig page
      */
     /**
-     * @Route("InfluencerManagement/influencerView", name="influencerView")
+     * @Route("InfluenceurManagement/addVente?user={URL,userID}", name="AddVente")
+     */
+    public function addVente($URL)
+    {
+        echo("Page Vente: ");
+        var_dump($URL);
+    }
+    /**
+     * @Route("InfluenceurManagement/influenceurView", name="influencerView")
      */
     public function influencerView()
     {
@@ -188,7 +231,7 @@ class InfluencerManagementController extends AbstractController
 
         // Loop to extract info of every influencer based on their id
         do {
-            //here extract info from Doctrine to populate the template; $stmt holds all the id; $j act as a key tha move by ++ each loop
+            //here extract info from Doctrine to populate the template; $stmt holds all the id; $j act as a key that move by ++ each loop
             $users[] = $this->getDoctrine()->getRepository(User::class)->find(($stmt[$j]));
             $Agency[] = $this->getAgency($stmt[$j]);
             $i--;
