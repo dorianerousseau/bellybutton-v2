@@ -168,23 +168,30 @@ class InfluencerManagementController extends AbstractController
             $add = $form->getData();
             //Ce tableau doit être utilisé pour générer un formulaire afin de rentrer les informations des tables de vente
             $URL = array(
-                'URLYT' => false,
-                'URLTW' => false,
-                'URLTK' => false,
-                'URLIG' => false
+                'URLYT' => "false",
+                'URLIG' => "false",
+                'URLTW' => "false",
+                'URLTK' => "false",                
+                'userId' => "1"
             );
             if ($add->getURLYT() != null) {
-                $URL['URLYT'] = true;
-            }
-            if ($add->getURLTW() != null) {
-                $URL['URLTW'] = true;
-            }
-            if ($add->getURLTK() != null) {
-                $URL['URLTK'] = true;
+                $URL['URLYT'] = "true";
             }
             if ($add->getURLIG() != null) {
-                $URL['URLIG'] = true;
+                $URL['URLIG'] = "true";
             }
+            if ($add->getURLTW() != null) {
+                $URL['URLTW'] = "true";
+            }
+            if ($add->getURLTK() != null) {
+                $URL['URLTK'] = "true";
+            }
+            
+
+
+
+            //WARN this is for testing purposes
+            $userId = 1;
             //TODO add the influencer to the DB and add a redirect to SelectInfluencer with the specified userID
             // ... perform some action, such as saving the task to the database
             // for example, if Task is a Doctrine entity, save it!
@@ -202,16 +209,18 @@ class InfluencerManagementController extends AbstractController
         ]);
     }
     // TODO figure out how to print only 10 influencer at a time ==> Maybe by making this an extends of another page and reload only this part (aka the tab)
+
     /**
-     * List all the influencer (Role==3 in the Database) and display it in the \templates\influencerManagement\index.html.twig page
+     * @Route("InfluenceurManagement/addVente?user={URLYT}_{URLTW}_{URLTK}_{URLIG}_{userId}", name="AddVente")
      */
-    /**
-     * @Route("InfluenceurManagement/addVente?user={URL,userID}", name="AddVente")
-     */
-    public function addVente($URL)
+    public function addVente($URLYT, $URLTW, $URLTK, $URLIG,$userId)
     {
-        echo("Page Vente: ");
-        var_dump($URL);
+        echo ("Page Vente: ");
+        var_dump($URLYT);
+        var_dump($URLIG);
+        var_dump($URLTW);
+        var_dump($URLTK);
+        var_dump($userId);
     }
     /**
      * @Route("InfluenceurManagement/influenceurView", name="influencerView")
