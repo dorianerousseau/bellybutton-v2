@@ -10,18 +10,25 @@
 namespace App\Controller;
 
 use App\Entity\InfluenceurManagement\AddInfluencer;
+use App\Entity\InfluenceurManagement\AddVente;
 use App\Entity\User;
 use App\Entity\InfluenceurManagement\Agency;
+use App\Entity\InfluenceurManagement\VenteIG;
+use App\Entity\InfluenceurManagement\VenteTK;
+use App\Entity\InfluenceurManagement\VenteTW;
+use App\Entity\InfluenceurManagement\VenteYT;
 use App\Entity\StatsIG;
 use App\Entity\StatsTK;
 use App\Entity\StatsTW;
 use App\Entity\StatsYT;
 use PDO;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -30,8 +37,8 @@ class InfluencerManagementController extends AbstractController
     //TODO figure out the service runner for TK; IG and TW (YT seems implemented) ==> Maybe implement a meta-runner?
 
 
-    // TODO insert special user to the DB here
-    //Constant for PDO connection
+    // TODO insert special user to the DB here; must be one with read and write access to the DB
+    //Constantes pour une connection via PDO
     const host = '127.0.0.1';
     const port = '3306';
     const db   = 'bellybutton';
@@ -160,6 +167,7 @@ class InfluencerManagementController extends AbstractController
             ->add('Commentary', TextType::class, [
                 'required' => false,
             ])
+            ->add('save', SubmitType::class)
             ->getForm();
 
         $form->handleRequest($request);
@@ -171,7 +179,7 @@ class InfluencerManagementController extends AbstractController
                 'URLYT' => "false",
                 'URLIG' => "false",
                 'URLTW' => "false",
-                'URLTK' => "false",                
+                'URLTK' => "false",
                 'userId' => "1"
             );
             if ($add->getURLYT() != null) {
@@ -186,7 +194,7 @@ class InfluencerManagementController extends AbstractController
             if ($add->getURLTK() != null) {
                 $URL['URLTK'] = "true";
             }
-            
+
 
 
 
@@ -213,14 +221,136 @@ class InfluencerManagementController extends AbstractController
     /**
      * @Route("InfluenceurManagement/addVente?user={URLYT}_{URLTW}_{URLTK}_{URLIG}_{userId}", name="AddVente")
      */
-    public function addVente($URLYT, $URLTW, $URLTK, $URLIG,$userId)
+    public function addVente(Request $request, $URLYT, $URLTW, $URLTK, $URLIG, $userId)
     {
-        echo ("Page Vente: ");
-        var_dump($URLYT);
-        var_dump($URLIG);
-        var_dump($URLTW);
-        var_dump($URLTK);
-        var_dump($userId);
+        $addVente = new AddVente();
+        $form = $this->createFormBuilder($addVente);
+
+        if ($URLYT == "true") {
+
+            $form
+                ->add('GarantieYT', IntegerType::class)
+                ->add('EstimationYT', IntegerType::class)
+                ->add('CachetInteYT', IntegerType::class)
+                ->add('MargeInteYT', IntegerType::class)
+                ->add('CachetVidDeYT', IntegerType::class)
+                ->add('MargeVidDeYT', IntegerType::class);
+        }
+        if ($URLIG == "true") {
+            $form
+                ->add('CachetPostIG', IntegerType::class)
+                ->add('MargePostIG', IntegerType::class)
+                ->add('CachetStoryIG', IntegerType::class)
+                ->add('MargeStoryIG', IntegerType::class)
+                ->add('CachetIGTV', IntegerType::class)
+                ->add('MargeIGTV', IntegerType::class);
+        }
+        if ($URLTW == "true") {
+            $form
+                ->add('CachetPDPTW', IntegerType::class)
+                ->add('MargePDPTW', IntegerType::class)
+                ->add('CachetSponsoTW', IntegerType::class)
+                ->add('MargeSponsoTW', IntegerType::class);
+        }
+        if ($URLTK == "true") {
+            $form
+                ->add('CachetPostTK', IntegerType::class)
+                ->add('MargePostTK', IntegerType::class);
+        }
+        $form = $form
+            ->add('save', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $addVente = $form->getData();
+            
+            if ($URLYT == "true") {
+                $venteYT= new VenteYT;
+                if ($addVente->getGarantieYT() != null) {
+                    $venteYT->setGarantie($addVente->getGarantieYT());
+                }
+                if($addVente->getEstimationYT()!=null){
+                    $venteYT->setEstimation($addVente->getEstimationYT());
+                }
+                if($addVente->getCachetInteYT()!=null)
+                {
+                    $venteYT->setCachetInte($addVente->getCachetInteYT());
+                }
+                if($addVente->getMargeInteYT()!=null)
+                {
+                    $venteYT->setMargeInte($addVente->getMargeInteYT());
+                }
+                else{
+                    $venteYT->setMargeInte(25);
+                }
+
+                if($addVente->getCachetVidDeYT()!=null)
+                {
+                    $venteYT->setCachetVidDe($addVente->getMargeVidDe());
+                }
+                if ($addVente->getMargeVidDe()!=null)
+                {
+                    $venteYT->setCachetVidDe($addVente->getMargeVidDe());
+                }
+                else{
+                    $venteYT->setCachetVidDe(25);
+                }
+            $venteYTEM = $this->getDoctrine()->getManager();
+            $venteYTEM->persist($venteYT);
+            $venteYTEM->flush();
+            }
+            if($URLIG == "true") {
+                $venteIG = new VenteIG;
+                if($addVente->getCachetPostIG()!=null)
+                {
+                    $venteIG->setCachetPost($addVente->getCachetPostIG());
+                }
+                if($addVente->getMargePostIG()!=null)
+                {
+                    $venteIG->setMargePost($addVente->getMargePostIG());
+                }
+                else{
+                    $venteIG->setMargePost(25);
+                }
+                if($addVente->getCachetStoryIG()!=null)
+                {
+                    $venteIG->setCachetStory($addVente->getCachetStoryIG());
+                }
+                if($addVente->getMargeStoryIG()!=null)
+                {
+                    $venteIG->setMargeStory($addVente->getMargeStoryIG());
+                }
+                else{
+                    $venteIG->setMargeStory(25);
+                }
+                if($addVente->getCachetIGTV()!=null)
+                {
+                    $venteIG->setCachetIGTV($addVente->getCachetIGTV());
+                }
+                if($addVente->getMargeIGTV()!=null)
+                {
+                    $venteIG->setMargeIGTV($addVente->getMargeIGTV());
+                }
+                else{
+                    $venteIG->setMargeIGTV(25);
+                }
+            $venteIGEM = $this->getDoctrine()->getManager();
+            $venteIGEM->persist($venteIG);
+            $venteIGEM->flush();
+            }
+            // $venteYTEM =$this->getDoctrine()->getManager();
+            //$venteYTEM->persist();
+            //$venteYTEM->flush();}
+            return $this->redirectToRoute('selectInfluencer', $userId);
+        }
+        return $this->render('influencerManagement/addVente.html.twig', [
+            'Form' => $form->createView(),
+            'YT' => $URLYT,
+            'IG' => $URLIG,
+            'TW' => $URLTW,
+            'TK' => $URLTK
+        ]);
     }
     /**
      * @Route("InfluenceurManagement/influenceurView", name="influencerView")

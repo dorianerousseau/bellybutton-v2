@@ -25,8 +25,12 @@
     {{ form_row(Form.URLTW, {'label':'URL Twitch:'}) }}
     {{ form_row(Form.URLTK, {'label':'URL TikTok:'}) }}
     {{ form_row(Form.agencyId, {'label': 'Agence:'}) }}
-    <!--TODO redirect this to path "addAgency"-->
+</div>
+<div>
+    <!--FIXME redirect this to path "addAgency"-->
     <aside><a href="{{ path('addAgency') }}"><button>Ajouter une Agence</button></a></aside>
+</div>
+<div>
     {{ form_row(Form.picture_small, {'label':'Miniature:'}) }}
     {{ form_row(Form.picture_large, {'label': 'Grand Format:'}) }}
     {{ form_row(Form.catAudience, {'label': 'Catégorie d\'Audience:'}) }}

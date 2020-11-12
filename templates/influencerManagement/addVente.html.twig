@@ -1,0 +1,54 @@
+{#
+Name: addVente.html.twig
+Author: Flavien Macquignon
+Date: 07/11/2020
+Comment: This file is a template to add information about Ventes into the Bellybutton database    
+#}
+{% extends 'main/base.html.twig' %}
+
+{% block title %} Ajouter les informations de Ventes {% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block body %}
+<div>
+    {{ form_start(Form) }}
+    {% if YT == 'true' %}
+    <h1>Informations de vente Youtube</h1>
+    {{ form_row(Form.GarantieYT, {'label': 'Garantie:'}) }}
+    {{ form_row(Form.EstimationYT, {'label': 'Estimation:'}) }}
+    {{ form_row(Form.CachetInteYT, {'label': 'Cachet pour une Intégration:'}) }}
+    {{ form_row(Form.MargeInteYT, {'label': 'Marge Bellybutton pour une Intégration:'}) }}
+    {{ form_row(Form.CachetVidDeYT, {'label': 'Cachet pour une Vidéo Dédié:'}) }}
+    {{ form_row(Form.MargeVidDeYT, {'label': 'Marge Bellybutton pour une Vidéo Dédié:'}) }}
+    {% endif %}
+
+    {% if IG == 'true' %}
+    <h1>Informations de vente Instagram</h1>
+    {{ form_row(Form.CachetPostIG, {'label': 'Cachet pour un Post:'}) }}
+    {{ form_row(Form.MargePostIG, {'label': 'Marge Bellybutton pour un Post:'}) }}
+    {{ form_row(Form.CachetStoryIG, {'label': 'Cachet pour une Story:'}) }}
+    {{ form_row(Form.MargeStoryIG, {'label': 'Marge pour une Story:'}) }}
+    {{ form_row(Form.CachetIGTV, {'label': 'Cachet pour un post IGTV:'}) }}
+    {{ form_row(Form.MargeIGTV, {'label': 'Marge Bellybutton pour un post IGTV:'}) }}
+    {% endif %}
+
+    {% if TW == 'true' %}
+    <h1>Informations de vente Twitch</h1>
+    {{ form_row(Form.CachetPDPTW, {'label': 'Cachet pour un placement de produit:'}) }}
+    {{ form_row(Form.MargePDPTW, {'label': 'Marge Bellybutton pour un placement de produit:'}) }}
+    {{ form_row(Form.CachetSponsoTW, {'label': 'Cachet pour un stream sponsorisé:'}) }}
+    {{ form_row(Form.MargeSponsoTW, {'label': 'Marge Bellybutton pour un stream sponsorisé:'}) }}
+    {% endif %}
+
+    {% if TK == 'true' %}
+    <h1>Informations de vente Tiktok</h1>
+    {{ form_row(Form.CachetPostTK, {'label': 'Cachet pour un Post Sponsorisé:'}) }}
+    {{ form_row(Form.MargePostTK, {'label': 'Marge Bellybutton pour un Posy Sponsorisé:'}) }}
+    {% endif %}
+
+    {{ form_end(Form) }}
+</div>
+{% endblock %}

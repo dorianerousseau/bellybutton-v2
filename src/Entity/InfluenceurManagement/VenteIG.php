@@ -102,7 +102,7 @@ class VenteIG
     {
         return $this->MargeStory;
     }
-    public function setMargeStor(int $MargeStory)
+    public function setMargeStory(int $MargeStory)
     {
         $this->MargeStory = $MargeStory;
         return $this;
@@ -119,18 +119,11 @@ class VenteIG
 
     public function getMargeIGTV(): ?int
     {
-        return $this;
+        return $this->MargeIGTV;
     }
     public function setMargeIGTV(int $MargeIGTV)
     {
         $this->MargeIGTV = $MargeIGTV;
-        return $this;
-    }
-
-    public function setMargeStory(int $MargeStory): self
-    {
-        $this->MargeStory = $MargeStory;
-
         return $this;
     }
 }
