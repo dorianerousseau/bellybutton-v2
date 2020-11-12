@@ -3,7 +3,7 @@
  * Name: Agency.php
  * Author: Flavien Macquignon
  * Date: 05/10/2020
- * Comment: This file is destined to connect to the BB_Central Database and create a Agency table for contacting purposes
+ * Comment: Ce fichier est destiner à se connecter à la base de données BB_Central et effectuer les opérations concernant les Agences
  */
 namespace App\Entity\InfluenceurManagement;
 

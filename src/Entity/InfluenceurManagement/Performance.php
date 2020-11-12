@@ -1,10 +1,12 @@
 <?php
+
 /**
  * Name: Performance.php
  * Author: Flavien Macquignon
  * Date: 05/10/2020
- * Comment: This file is file destined to connect to the BB_Central Database and create a Performance table for saving statistics
+ * Comment: Ce fichier est destiner à se connecter à la base de données BB_Central et effectuer les opérations concernant les "Performances" d'un Influenceur
  */
+
 namespace App\Entity;
 
 
@@ -18,8 +20,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 class Performance
 {
-  // TODO link that to userID using the success() function inside InfluencerController.php
-  // FIXME this can't be the key value because not every user under success() will not necesserely have a performance tab into it
   /**
    * @ORM\Id()
    * @ORM\GeneratedValue()
@@ -27,7 +27,7 @@ class Performance
    */
   private $idUser;
 
-  // TODO Correct the integer in all idStats; it must be a string no?
+  // TODO Corriger les integer de chaque idStats; doivent être des String
   /**
    * @ORM\Column(type="integer", nullable=true)
    * @ORM\ManyToOne(targetEntity="App\Entity\InfluenceurManagement\StatsYT", inversedBy="idStatsYT")
@@ -65,7 +65,7 @@ class Performance
    */
   private $margin;
 
-  // TODO figure out a path to add here and how to use it on output; also how to input the file
+  //WARN ici sont stocker les chemins d'accès aux photos
   /**
    * @ORM\Column(type="string", nullable=true)
    */
@@ -75,29 +75,30 @@ class Performance
    */
   private $pictureSmall;
 
+  //TODO Creér les constructeurs
   /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @ORM\ManyToOne(targetEntity="App\Entity\InfluenceurManagement\VenteYT", inversedBy="id")
-     */
-    private $idVenteYT;
+   * @ORM\Column(type="integer", nullable=true)
+   * @ORM\ManyToOne(targetEntity="App\Entity\InfluenceurManagement\VenteYT", inversedBy="id")
+   */
+  private $idVenteYT;
 
-      /**
-     * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="App\Entity\InfluenceurManagement\VenteTW", inversedBy="id")
-     */
-    private $idVenteTW;
+  /**
+   * @ORM\Column(type="integer")
+   * @ORM\ManyToOne(targetEntity="App\Entity\InfluenceurManagement\VenteTW", inversedBy="id")
+   */
+  private $idVenteTW;
 
-      /**
-     * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="App\Entity\InfluenceurManagement\VenteTK", inversedBy="id")
-     */
-    private $idVenteTK;
+  /**
+   * @ORM\Column(type="integer")
+   * @ORM\ManyToOne(targetEntity="App\Entity\InfluenceurManagement\VenteTK", inversedBy="id")
+   */
+  private $idVenteTK;
 
-      /**
-     * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="App\Entity\InfluenceurManagement\VenteIG", inversedBy="id")
-     */
-    private $idVenteIG;
+  /**
+   * @ORM\Column(type="integer")
+   * @ORM\ManyToOne(targetEntity="App\Entity\InfluenceurManagement\VenteIG", inversedBy="id")
+   */
+  private $idVenteIG;
 
 
 
@@ -143,8 +144,6 @@ class Performance
   {
     return $this->pictureLarge;
   }
-
-  // TODO check how to upload the picture to the server; this column will store the PATH to the .jpg file
   public function setpictureLarge(string $pictureLarge)
   {
     $this->pictureLarge = $pictureLarge;
@@ -154,7 +153,6 @@ class Performance
   {
     return $this->pictureSmall;
   }
-  //TODO check the todo of setpictureLarge()
   public function setpictureSmall(string $pictureSmall)
   {
     $this->pictureSmall = $pictureSmall;
@@ -163,55 +161,54 @@ class Performance
 
   public function getIdUser(): ?int
   {
-      return $this->idUser;
+    return $this->idUser;
   }
 
   public function getIdStatsYT(): ?int
   {
-      return $this->idStatsYT;
+    return $this->idStatsYT;
   }
 
   public function setIdStatsYT(?int $idStatsYT): self
   {
-      $this->idStatsYT = $idStatsYT;
+    $this->idStatsYT = $idStatsYT;
 
-      return $this;
+    return $this;
   }
 
   public function getIdStatsIG(): ?int
   {
-      return $this->idStatsIG;
+    return $this->idStatsIG;
   }
 
   public function setIdStatsIG(?int $idStatsIG): self
   {
-      $this->idStatsIG = $idStatsIG;
+    $this->idStatsIG = $idStatsIG;
 
-      return $this;
+    return $this;
   }
 
   public function getIdStatsTW(): ?int
   {
-      return $this->idStatsTW;
+    return $this->idStatsTW;
   }
 
   public function setIdStatsTW(?int $idStatsTW): self
   {
-      $this->idStatsTW = $idStatsTW;
+    $this->idStatsTW = $idStatsTW;
 
-      return $this;
+    return $this;
   }
 
   public function getIdStatsTK(): ?int
   {
-      return $this->idStatsTK;
+    return $this->idStatsTK;
   }
 
   public function setIdStatsTK(?int $idStatsTK): self
   {
-      $this->idStatsTK = $idStatsTK;
+    $this->idStatsTK = $idStatsTK;
 
-      return $this;
+    return $this;
   }
-
 }

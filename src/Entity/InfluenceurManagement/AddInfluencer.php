@@ -4,7 +4,7 @@
  * Name: AddInfluencer.php
  * Author: Flavien MAcquignon
  * Date: 22/10/2020
- * Comment: this file is a fonctionnal class to retrieve all information of the Add Influencer function of the Influencer Management Dashboard
+ * Comment: Ce fichier est une classe fonctionelle utilisé pour récupérer les informations du formulaire AddInfluenceur 
  */
 
 namespace App\Entity\InfluenceurManagement;
@@ -110,7 +110,7 @@ class AddInfluencer
     {
         return $this->agencyId;
     }
-    //FIXME Delete null set
+    //FIXME Supprimer cette modification à null; elle est présente pour des test
     public function setPictureSmall($picture_small)
     {
         echo('picture_small received');
@@ -120,6 +120,7 @@ class AddInfluencer
     {
         return $this->picture_small;
     }
+    //FIXME Supprimer cette modification à null; elle est présente pour des test
     public function setPictureLarge($picture_large)
     {
         echo('picture_large received');

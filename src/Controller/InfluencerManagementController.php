@@ -4,7 +4,7 @@
  * Name: InfluencerManagementController.php
  * Author: Flavien Macquignon
  * Date: 05/10/2020
- * Comment: This file handle all the compute function of the influencer management dashboard of Bellybutton Group
+ * Comment: Ce fichier prend en charge toutes les fonctions de calcul de la partie InfluenceurManagement
  */
 
 namespace App\Controller;
@@ -33,11 +33,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class InfluencerManagementController extends AbstractController
-{   //TODO figure out a way to secure the acess to this controler==> Maybe link it the same way as Dashboard
-    //TODO figure out the service runner for TK; IG and TW (YT seems implemented) ==> Maybe implement a meta-runner?
+{   //TODO Trouver comment sécuriser l'accès à ce controlleur, bloquer son accès pour les utilisateurs sans le bon rôle.
+    //TODO Connecter ce controlleur aux runners pour une mise à jour des infos YT, IG, TW et TK
 
 
-    // TODO insert special user to the DB here; must be one with read and write access to the DB
+    // TODO Les paramètres de ce PDO doivent êtres changés, ils sont spécifiques au local
     //Constantes pour une connection via PDO
     const host = '127.0.0.1';
     const port = '3306';
@@ -52,15 +52,27 @@ class InfluencerManagementController extends AbstractController
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES   => false,
     ];
-    //----------------------------------------------------------------------------------
-    //TODO check how to add this to the database
+    //---------------------------------------------------------------------------------------------------------------------------------------
+    //                                  Gestion des Influenceurs
+    //---------------------------------------------------------------------------------------------------------------------------------------
+    /**
+     * Permet d'ajouter les informations d'un Influenceur à la base de donnée
+     * @param $request
+     * 
+     * @return $this->render() Permet l'affichage du Formulaire AddInfluenceur au travers de la page templates\influencerManagement\add.html.twig
+     * @return $this->redirectToRoute() Redirige l'utilsateur vers la page d'Ajout des informations de Vente
+     * //TODO @return $this->redirectToRoute () Rediriger l'utilisateur vers la page selectInfluenceur (pour afficher les informations du nouvel utilisateur entré)
+     */
     /**
      * @Route("InfluencerManagement/add", name="addInfluencer")
      */
     public function addInfluencer(Request $request)
     {
-        //-----------------------------------------------
-        // Preparation to handle a drop down menu on all Agency of the Database
+         //TODO Connecter ceci à la fonction success() de InflucencerController afin d'ajouter l'ID du nouvel influenceur à la table performance
+         /*TODO Effectuer des vérifications afin de ne pas ajouter un Influenceurs dans le back si il est déjà inscrit sur la plateforme 
+         * ==> effectuer une recherche (influenceurPrésent?) avant chaque ajout
+         */
+        //Préparation pour le menu "DropDown" permettant la sélection des agences
         // Compteur pour arrêter la boucle
         $k = 0;
         //Nombre d'agence dans la Base, détermine la longueur de la boucle
@@ -78,7 +90,7 @@ class InfluencerManagementController extends AbstractController
             $k++;
         } while ($k < $nbrAgences[0]);
         //---------------------------------------------------------
-        //Actual form as displayed on the Page
+        //Formulaire AddInfluenceur comprenant les différents champs néceassaires à l'ajout d'un Influenceur
         $add = new AddInfluencer();
         $form = $this->createFormBuilder($add)
             ->add('fname', TextType::class)
@@ -96,16 +108,29 @@ class InfluencerManagementController extends AbstractController
             ->add('URLTK', TextType::class, [
                 'required' => false,
             ])
+            //Un "dropdown menu" est affiché en utilisant les options du tableau $choiceAgency
             ->add('agencyId', ChoiceType::class, [
                 'choices'  => $choiceAgency,
             ])
-            //WARN check if this is handled correctly
+            //WARN Cette Partie n'est pas terminée
+            //TODO La photo doit être sauvegardé dans "assets\images\Influencer" et son PATH doit être sauvegardé dans la base
             ->add('picture_small', FileType::class, [
                 'required' => false,
             ])
+            //TODO Même chose que pour picture_small
             ->add('picture_large', FileType::class, [
                 'required' => false,
             ])
+            //WARN Les différentes catégories d'audience ne sont pas stockées en "PlainText" mais grace à un numéro dont la correspondance ce fait ici
+            /**
+             * //TODO Vérifier avec PJ si il veut pouvoir "Override" les valeurs d'un Influenceur 
+             * (Cette catégorie est déterminée de manière "automatique" en fonction des données des Stats), 
+             * si un influenceur se retrouve entre 2 catégories, doit-on pouvoir la changer "automatiquement"?
+             * La sélection ici intègre un 1 devant la catégorie; si elle est déterminée automatiquement, on ajoutera un zéro devant la catégorie.
+             * Si jamais la catégorie déterminée "automatiquement", et celle ajoutée "à la main" sont identique, on modifiera la valeur avec un zéro devant
+             * Si jamais la valeur a été enregistré depuis une nombre de jours spécifiés, et que l'influenceur n'a pas rejoins la catégorie spécifiée, on la modifiera avec une zéro devant
+             *  //WARN vérifier avec PJ ce qui l'intéresse le plus pour cela
+             */
             ->add('catAudience', ChoiceType::class, [
                 'choices' =>
                 [
@@ -127,10 +152,11 @@ class InfluencerManagementController extends AbstractController
                     'Qualified' => '2',
                     'Open' => '3',
                     'OK' => '4',
-                    //FIXME display check mark here
+                    //FIXME Permettre l'affichage d'un symbole "Checkmark dans la "Dropdown" List à la place de "Check"
                     "Check" => '5'
                 ]
             ])
+            //Représente les différents secteurs de BB
             ->add('Sector', ChoiceType::class, [
                 'choices' =>
                 [
@@ -171,10 +197,11 @@ class InfluencerManagementController extends AbstractController
             ->getForm();
 
         $form->handleRequest($request);
+        //Test pour vérifier si le formulaire est bien renvoyé par l'utilisateur et si il a été correctement remplis
         if ($form->isSubmitted() && $form->isValid()) {
-
+            //Récupère les données du formulaire dans la variable $add afin de disperser les données dans la Base
             $add = $form->getData();
-            //Ce tableau doit être utilisé pour générer un formulaire afin de rentrer les informations des tables de vente
+            //Ce tableau est utilisé pour générer un formulaire afin de rentrer les informations des tables de vente; il est initialisé à false par défaut
             $URL = array(
                 'URLYT' => "false",
                 'URLIG' => "false",
@@ -182,6 +209,7 @@ class InfluencerManagementController extends AbstractController
                 'URLTK' => "false",
                 'userId' => "1"
             );
+            //Vérifie si les différents champs contenant les URL des réseaux ont été remplis, si oui, initialise le tableau URL à "true"
             if ($add->getURLYT() != null) {
                 $URL['URLYT'] = "true";
             }
@@ -200,15 +228,22 @@ class InfluencerManagementController extends AbstractController
 
             //WARN this is for testing purposes
             $userId = 1;
-            //TODO add the influencer to the DB and add a redirect to SelectInfluencer with the specified userID
+
+            //Répartir les données de $add entre les différents Entity
+            //TODO Effectivement ajouter les influenceurs à la Base de Données en utilisant Doctrine
+
             // ... perform some action, such as saving the task to the database
             // for example, if Task is a Doctrine entity, save it!
             // $entityManager = $this->getDoctrine()->getManager();
             // $entityManager->persist($task);
             // $entityManager->flush();
 
-            //TODO redirect here to a vente form 
-            //this task_success must account for a full false $URL array
+            //Redirige vers le formulaire d'ajout des informations de vente
+            /*TODO Ajouter un test pour prendre en compte le fait de ne pas avoir rempli les différentes URL 
+            * et donc d'ajouter un Influenceur sans ces informations de vente
+            * Il faudra également penser à redigérer l'utilisateur vers la page selectInfluenceur 
+            * du nouvel utilisateur même si ce dernier n'a pas d'information de vente
+            */
             return $this->redirectToRoute('AddVente', $URL);
         }
 
@@ -216,16 +251,29 @@ class InfluencerManagementController extends AbstractController
             'Form' => $form->createView()
         ]);
     }
-    // TODO figure out how to print only 10 influencer at a time ==> Maybe by making this an extends of another page and reload only this part (aka the tab)
-
+    
+/**
+     * Permet d'ajouter les informations d'un de vente d'un Influenceur à la base de donnée
+     * @param $request
+     * @param string $URLYT Détermine si le Champs URLYT était remplis ou non sur le formulaire de addInlfluenceur ('true' ou 'false')
+     * @param string $URLTW Détermine si le Champs URLTW était remplis ou non sur le formulaire de addInlfluenceur ('true' ou 'false')
+     * @param string $URLTK Détermine si le Champs URLTK était remplis ou non sur le formulaire de addInlfluenceur ('true' ou 'false')
+     * @param string $URLIG Détermine si le Champs URLIG était remplis ou non sur le formulaire de addInlfluenceur ('true' ou 'false')
+     * @param integer $userId L'userID de l'Influenceur concerné par les informations de vente entré sur cette page
+     * 
+     * @return $this->redirectToRoute() Rediriger l'utilisateur vers la page selectInfluenceur (pour afficher les informations du nouvel utilisateur entré)
+     * @return $this->render() Permet l'affichage du Formulaire addVente au travers de la page templates\influencerManagement\addVente.html.twig
+     */
     /**
      * @Route("InfluenceurManagement/addVente?user={URLYT}_{URLTW}_{URLTK}_{URLIG}_{userId}", name="AddVente")
      */
     public function addVente(Request $request, $URLYT, $URLTW, $URLTK, $URLIG, $userId)
     {
+        //Formulaire similaire à l'ajout d'un influenceur mais comprenant uniquement les informations de vente
         $addVente = new AddVente();
         $form = $this->createFormBuilder($addVente);
 
+        //Différents test afin de n'ajouter que les informations concernant les URL ayant été effectivement remplies sur le formulaires précédent ($URL passe les données entre les pages)
         if ($URLYT == "true") {
 
             $form
@@ -262,10 +310,13 @@ class InfluencerManagementController extends AbstractController
             ->getForm();
 
         $form->handleRequest($request);
+        //Partie d'ajout effective des données 
         if ($form->isSubmitted() && $form->isValid()) {
+            //WARN l'ajout des données n'a pas pu être testé
             $addVente = $form->getData();
-            
+            //Test si le champs URL avait été remplis
             if ($URLYT == "true") {
+                //Disperse les informations de $addVente vers une nouvelle Entity ($venteYT); c'est cette Entity qui sera enregistrée par Doctrine
                 $venteYT= new VenteYT;
                 if ($addVente->getGarantieYT() != null) {
                     $venteYT->setGarantie($addVente->getGarantieYT());
@@ -296,10 +347,14 @@ class InfluencerManagementController extends AbstractController
                 else{
                     $venteYT->setCachetVidDe(25);
                 }
+            //Recupère l'EntityManager de l'Entity VenteYT
             $venteYTEM = $this->getDoctrine()->getManager();
+            //Prépare Doctrine à sauvegarder l'Entity dans la base de données
             $venteYTEM->persist($venteYT);
+            //Sauvegarde l'Entity dans la base de données
             $venteYTEM->flush();
             }
+            //Repète l'opération avec IG
             if($URLIG == "true") {
                 $venteIG = new VenteIG;
                 if($addVente->getCachetPostIG()!=null)
@@ -339,6 +394,8 @@ class InfluencerManagementController extends AbstractController
             $venteIGEM->persist($venteIG);
             $venteIGEM->flush();
             }
+            //TODO Effectuer les ajouts vers la base pour TW et TK
+
             // $venteYTEM =$this->getDoctrine()->getManager();
             //$venteYTEM->persist();
             //$venteYTEM->flush();}
@@ -353,36 +410,48 @@ class InfluencerManagementController extends AbstractController
         ]);
     }
     /**
+     * Permet d'afficher la liste de tous les influenceurs présents dans la base
+     * @return $this->render() Permet l'affichage d'une liste des influenceurs au travers de la page templates\influencerManagement\select.html.twig
+     */
+    /**
      * @Route("InfluenceurManagement/influenceurView", name="influencerView")
      */
     public function influencerView()
     {
-        //Query the number of user who is an influencer to populate $k and fill the do...while loop after
+        //Recupère le nombre d'utilisateur Influenceur pour remplir $k et alimenter la boucle do...While
         $k = $this->extractColumnDB("SELECT COUNT(user_id) FROM user_role WHERE role_id=3", 0);
 
-        //return a array of user_id where role==3
-        //basically return all influencer id
+        //Retourne un tableau contenant tous les user_id dont le role==3
+        //Retourne tous les id des utilisateurs qui sont effectivement des Influenceurs
         $stmt = $this->extractColumnDB("SELECT user_id FROM user_role WHERE role_id='3'", 0);
 
-        // initialize variables for the loop
+        // Initialisation des variables pour la boucle
         $i = $k[0] - 1;
         $j = 0;
 
-        // Loop to extract info of every influencer based on their id
+        //Boucle pour extraire chaque utilisateur en fonction de leur id
         do {
-            //here extract info from Doctrine to populate the template; $stmt holds all the id; $j act as a key that move by ++ each loop
+            //Extraction des informations depuis Doctrine afin de remplir le Template
+            //$stmt contient les id et $j est une clé qui augmente de 1 à chaque boucle (afin de passer à l'id suivant)
             $users[] = $this->getDoctrine()->getRepository(User::class)->find(($stmt[$j]));
+            //Extrait les Agence de chaque utilisateur (getAgency renvoit une Entity Agency)
             $Agency[] = $this->getAgency($stmt[$j]);
             $i--;
             $j++;
         } while ($i >= 0);
+
         return $this->render('influencerManagement/index.html.twig', [
             'users' => $users,
             'Agency' => $Agency
         ]);
     }
 
-    //TODO check if this could be integrated into influencerView instead, as a "pop-up" or a subpage (iframe)
+    /**
+     * Permet de supprimmer un Influenceur de la base de données
+     * //TODO @param $userID Id de l'utilisateur à supprimer de la base de donnée
+     * @return $this->render() Permet d'afficher la page de confirmation de suppression //TODO Créer la page de suppression
+     */
+    //TODO Vérifier si cette page ne peut pas être intégré dans une page selectInfluenceur (comme une IFrame par exemple et donc limiter le nombre de changement de page)
     /**
      * @Route("InfluencerManagement/delete", name="deleteInfluencer")
      */
@@ -391,7 +460,12 @@ class InfluencerManagementController extends AbstractController
         return $this->render('influencerManagement/remove.html.twig');
     }
 
-    // TODO make this as a "pop-up" or a subpage? (iframe?)
+    /**
+     * Permet de modifier les informations d'un Influenceur de la base de donnée
+     * //TODO @param $userID Id de l'utilisateur concerné par la modification
+     * @return $this->render() Permet d'afficher le formulaire permettant la modification (le Formulaire doit être prérempli avec les informations présentes dans la base) //TODO Créer la page de modification 
+     */
+    //TODO Vérifier si cette page ne peut pas être intégré dans une page selectInfluenceur (comme une IFrame par exemple et donc limiter le nombre de changement de page)
     /**
      * @Route("InfluencerManagement/modif", name="modifInfluencer")
      */
@@ -399,29 +473,34 @@ class InfluencerManagementController extends AbstractController
     {
         return $this->render('influencerManagement/modif.html.twig');
     }
-    //TODO figure out how make the search with param
-    // Search is effectued directly into the Database trough a SQL query and concerned user are extracted by doctrine based on their userId
+    /**
+     * Permet d'effectuer une recherche au sein de la base de donnée
+     * 
+     */
+    //TODO Créer cette fonction de recherche d'un influenceur
     public function searchInfluencer()
     {
     }
 
-    //TODO Send a User, a Agency, a Performance, a Stats (based on null) and a catAudience object to the template
-    //TODO extract theses objects based on history (just extract lastest update and make compute based on that)
-    //TODO Make compute to process data
-    //TODO handle V30 computing
-    //TODO figure out how to print out history
+    //TODO Envoyer un Uitlisateur, une Agence, une Performance, les Stats, une table catAudience (par Stats) et des Vente (Quand elles sont présentes)
+    //TODO Extraire ces objets sur une base "historique" --> N'extraire que les plus "récents" afin d'effectuer les calculs sur de données "à jour" (V30 en particulier)
+    //TODO Trouver un moyen de gérer l'historique 
     /**
      * @Route("InfluencerManagement/select?user={userId}", name="selectInfluencer")
      */
     public function selectInfluencer(int $userId)
     {
+        //TODO Faire attention à la correspondance entre les différentes catégories d'Audience (Ne PAS afficher le numéro stocker dans la base de données mais plutôt son équivalent (voir formulaire AddInfluenceur))
+        // WARN Attention au correspondance également pour 'Status' et 'Sector'
         $user = $this->getDoctrine()->getRepository(User::class)->find($userId);
         return $this->render('influencerManagement/select.html.twig', ['user' => $user]);
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------
-    //TODO use iframe to render theses pages insides another as "pop-up" 
-    //TODO check if this could be integrated into influencerView instead, as a "pop-up" or a subpage
+    //                              Gestion des Agences
+    //---------------------------------------------------------------------------------------------------------------------------------
+    //TODO Vérifier si cette page ne peut pas être intégré dans une page (comme une IFrame par exemple et donc limiter le nombre de changement de page)
+    //TODO Gérer ici l'ajout d'une agence
     /**
      * @Route("InfluencerManagement/addAgency", name="addAgency")
      */
@@ -429,6 +508,7 @@ class InfluencerManagementController extends AbstractController
     {
         return $this->render('influencerManagement/addAgency.html.twig');
     }
+
     /**
      * @Route("InfluencerManagement/select?agency={agencyId}", name="selectAgency")
      */
@@ -437,9 +517,9 @@ class InfluencerManagementController extends AbstractController
         if ($agencyId == "Sans Agence") {
             return $this->influencerView();
         } else {
-            //extract the id of the agency using a SQL query
+            //Extrait l'id de l'agence en se basant sur $agencyid
             $agency = $this->extractColumnDB("SELECT id FROM agency WHERE name_agency='" . $agencyId . "'", 0);
-            //use the agencyId to extract an Agency object
+            //Extrait l'objet Agency en utilisant l'id $agency
             $Agency = $this->getDoctrine()->getRepository(Agency::class)->find($agency[0]);
 
             return $this->render('influencerManagement/selectAgency.html.twig', ['Agency' => $Agency]);
@@ -448,24 +528,25 @@ class InfluencerManagementController extends AbstractController
     /**
      * @Route("InfluencerManagement/modif?agency={agencyId}", name="modifAgency")
      */
-    //TODO check if this could be integrated into influencerView instead, as a "pop-up" or a subpage
+    //TODO Vérifier si cette page ne peut pas être intégré dans une page (comme une IFrame par exemple et donc limiter le nombre de changement de page)
     public function modifAgency($agencyId)
     {
         return $this->render('influencerManagement/modifAgency.html.twig');
     }
-    //TODO check if this could be integrated into influencerView instead, as a "pop-up" or a subpage
+//TODO Vérifier si cette page ne peut pas être intégré dans une page (comme une IFrame par exemple et donc limiter le nombre de changement de page)
     public function deleteAgency($idAgency)
     {
         return $this->render('influencerManagement/deleteAgency.html.twig');
     }
     //---------------------------------------------------------------------------------------------------------------------------------
+    //                              Fonctions
     //---------------------------------------------------------------------------------------------------------------------------------
     /**
-     * Send a query to the database and extact a single column
-     * @param $SQL: The SQL query
-     * @param $numColumn: return this column in the array (start at zero)
+     * Envoit une requête à la base de donnée et extrait une unique colonne 
+     * @param $SQL: La requête SQL
+     * @param $numColumn: Permet de sélectionner le numéro de colonne à retourner (commence à zéro)
      *
-     * @return $stmt: a array of all row of the specified column in $numColumn
+     * @return $stmt: Un tableau de toutes les lignes de la colonne spécifié par $numColumn
      */
     private function extractColumnDB(string $SQL, int $numColumn)
     {
@@ -476,10 +557,10 @@ class InfluencerManagementController extends AbstractController
     }
 
     /**
-     * Retrieve the Agency object of the userid passed in parameter
-     * @param $userid: the userid of the user that you want to retrieve the Agency
-     * @return $AgencyN: if the querying is null; return an Agency Object with "Sans Agence" as Agency Name
-     * @return $Agency: if there is an Agency in the DataBase, return an Agency Object filled with information from the Agency Table 
+     * Récupère l'object Agency de l'userid passé en paramètre
+     * @param $userid: L'userid dont vous voulez retrouver l'Agence
+     * @return $AgencyN: Si la requête retourne "null" renvoit un objet Agency sans id et dont le nom est :"Sans Agence"
+     * @return $Agency: Si une Agence est retrouvé par la requête, renvoit un objet Agency remplis par les informations concernant l'Agence
      */
     private function getAgency(string $userid)
     {
@@ -496,24 +577,24 @@ class InfluencerManagementController extends AbstractController
 
 
     /**
-     * Calcul the V30 of the stats object passed in parameter
-     * @param $idStats: an idStat type object
-     * @return $V30: The actual V30 based on the information of the idStat object
-     * @return $updatedAt: return the date where the data was extracted from the social site (in order to keep track of updated data)
+     * Calcule la V30 de l'Objet passé en Paramètre
+     * @param $idStats: Un objet de type IdStats
+     * @return $V30: LA valeur de la V30 une fois calculé
+     * @return $updatedAt: Retourne la date de la dernière mise à jour des données depuis le réseau social afin de fournir une indication de "l'age des données"
      * 
-     * @error can throw a Not Found Exception if another stat from 30 days isn't found 
+     * @error Peut renvoyer une erreur 'No stats Found' si aucune donnée ne permet le calcul 
      */
 
     /** public function getV30( $idStats )
      * 
      {
-         //TODO calcul V30 here
+         //TODO Calculer la V30 ici (Vérifier le calcul)
         $V30=0;
         $updatedAt=0;
         if ($idStats instanceof StatsYT){        
                 $updatedAt= $idStats->getUpdatedAt();
-                //FIXME fix cette requête pour bien ajouter 30j au time stamp de l'objet idStats passé en @param 
-                //WARN besoin de faire une requête "classique" pour un WHERE LIKE sur le timestamp (Delta de 3 jours à confirmer avec @PJ)
+                //FIXME Ajouter 30jours à l'objet idStats passé en @param 
+                //WARN Il faut faire une requête "classique" pour un WHERE LIKE sur le timestamp (Delta de 3 jours à confirmer avec @PJ)
                 $idStatsOld->getDoctrine()->getRepository(StatsYT::class)->findOneBy(['updatedAt'=>$updatedAt+30j]);
                 if (!($idStatsOld instanceof StatsYT)) {
                     throw $this->createNotFoundException(

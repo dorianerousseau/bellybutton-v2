@@ -3,7 +3,7 @@
  * Name: StatsTW.php
  * Author: Flavien Macquignon
  * Date: 05/10/2020
- * Comment: This file is file destined to connect to the BB_Central Database and create a StatsTW table to save Twitch statistics
+ * Comment: Ce fichier est destiner à se connecter à la base de données BB_Central et effectuer les opérations concernant les perfomance d'un Influenceurs sur Twitch
  */
 namespace App\Entity;
 

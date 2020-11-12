@@ -4,7 +4,7 @@
  * Name: AddVente.php
  * Author: Flavien Macquignon
  * Date: 06/11/2020
- * Comment: this file is a fonctionnal class used to retrieve information about sales of an influencer
+ * Comment: Ce fichier est une classe fonctionnelle utilisé pour récupérer les informations du formulaire AddVente
  */
 namespace App\Entity\InfluenceurManagement;
 

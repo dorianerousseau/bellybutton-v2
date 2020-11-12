@@ -3,8 +3,8 @@
 /**
  * Name: VenteYT.php
  * Author: Flavien Macquignon
- * Date: 268/10/2020
- * Comment: This file is used to store billing information about an influencer about Youtube 
+ * Date: 28/10/2020
+ * Comment: Ce fichier est destiner à se connecter à la base de données BB_Central et effectuer les opérations concernant les informations de vente d'un Influenceurs sur Youtube 
  */
 
 namespace App\Entity\InfluenceurManagement;

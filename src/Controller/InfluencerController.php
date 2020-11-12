@@ -60,7 +60,7 @@ class InfluencerController extends AbstractController
      */
     public function success()
     {
-        // TODO check with @benlac to see if this is possible to change this function and make it also add the userID into performance
+        // TODO Modifier cette fonction afin de lui faire créer un objet Performance avec l'ID de l'utilisateur nouvellement créé
         return $this->render('influencer/success.html.twig');
     }
     /**

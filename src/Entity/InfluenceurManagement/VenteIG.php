@@ -3,7 +3,7 @@
 /**
  * Name: VenteIG.php
  * Author: Flavien Macquignon
- * Comment: This file is used to store billing information about an influencer about Instagram
+ * Comment: Ce fichier est destiner à se connecter à la base de données BB_Central et effectuer les opérations concernant les informations de vente d'un Influenceurs sur Instagram
  */
 
 namespace App\Entity\InfluenceurManagement;

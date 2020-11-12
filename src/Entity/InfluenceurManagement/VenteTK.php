@@ -4,7 +4,7 @@
  * Name: VenteTK.php
  * Author: Flavien Macquignon
  * Date: 28/10/2020
- * Comment:  This file is used to store billing information about an influencer about TikTok
+ * Comment:  Ce fichier est destiner à se connecter à la base de données BB_Central et effectuer les opérations concernant les informations de vente d'un Influenceurs sur TikTok
  */
 
 namespace App\Entity\InfluenceurManagement;
