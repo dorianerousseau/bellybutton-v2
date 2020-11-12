@@ -2,14 +2,14 @@
  Name: add.html.twig
  Author: Flavien Macquignon
  Date: 05/10/2020
- Comment: This file is a template to add a information about a influencer stored into the Bellybutton database
+ Comment: Ce fichier est un Template pour l'ajout de nouveaux influenceurs dans la base BB_Central
  #}
 
 {% extends 'main/base.html.twig' %}
 
 
 {% block title %} Ajouter un Influenceur {% endblock %}
-{# FIXME stylesheet block is empty (no reference to this block)#}
+{# FIXME  Ajouter du CSS ici #}
 {% block stylesheets %}
 
 {% endblock %}
@@ -27,7 +27,8 @@
     {{ form_row(Form.agencyId, {'label': 'Agence:'}) }}
 </div>
 <div>
-    <!--FIXME redirect this to path "addAgency"-->
+    <!--FIXME Rediriger cela vers la fonction addAgency
+        TODO Vérifier si cela ne peut pas être fait au sein d'un IFrame-->
     <aside><a href="{{ path('addAgency') }}"><button>Ajouter une Agence</button></a></aside>
 </div>
 <div>

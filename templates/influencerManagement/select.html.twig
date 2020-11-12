@@ -2,16 +2,13 @@
     Name: select.html.twig
     Author: Flavien Macquignon 
     Date: 15/10/2020
-    Comment: This file is the template for the display of an influencer
+    Comment: Ce fichier est un Template pour l'affiche d'un seul influenceur présent dans la base BB_Central
 #}
-
+{# Cette page est issue d'un ancien formulaire de AddInfluenceur et contient donc encore certains éléments correspondant à une logique d'ajout d'influenceur#}
 {% extends 'main/base.html.twig' %}
 {% block title %} {{ user.getFirstname() }} {{ user.getLastname() }} | {{ user.getUsername() }} {% endblock %}
 
 {% block body %}
-<!-- TODO All values must be set into champs and champs must be locked(==>https://html.com/attributes/input-disabled/)-->
-<!-- TODO Send a User, a Agency, a Performance, a Stats (based on null) and a catAudience object from the controller-->
-<!-- TODO Build a "dashboard" to receive theses objects-->
 <!-- TODO create a "Compte crée chez BB; cliquez ici pour réinitialiser le mot de passe" afin d'éviter le cas où l'user est déjà présent-->
 <div>
     <h1> {{ user.getLastname() }} </h1>
@@ -21,7 +18,8 @@
 
 <label form="fname">Prénom: </label>
 <input type="text" id="fname" name="fname" placeholder="Prénom" required><br>
-{# TODO just display the picture_small here #}
+{# TODO Afficher uniquement "pictur_small" par défaut 
+   TODO Créer un bouton permettant d'afficher "picture_large" en cas de besoin #}
 <aside>
     <label form="picture_small">Miniature:</label>
     <input type="file" id="picture_small" name="picture_small" accept="image/jpeg, image/png" required><br>
@@ -30,7 +28,7 @@
 <label form="email">Email: </label>
 <input type="email" id "email" name="email" placeholder="adressepro@pro.com" required><br>
 
-<!-- This regex pattern seems to match any phone number; to check on usage-->
+
 <label form="phone">Téléphone: </label>
 <input type="tel" id="phone" name="phone" pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"
     placeholder="1234567890" required><br> <br>
@@ -44,8 +42,6 @@
 <aside>
     <label form="agency">Agence :</label>
     <select name="Agency" id="Agency">
-
-    <!--TODO Make a switch statement to select the right sector-->
     {% switch  %}
 
     {% case "text" %}
@@ -64,7 +60,6 @@
 {% endswitch %}
 
     </select>
-    <!-- WARN Theses sector are stored in the DataBase by their values instead of their labels-->
     <label form="Secteurs BB">Secteurs BB: </label>
     <select name="Secteur_BB" id="SectorBB" required>
         <option value="0">Auto</option>
@@ -95,7 +90,7 @@
         <option value="25">Voyage</option>
     </select> <br> <br>
 
-    <!-- TODO Switch statement here too-->
+
     <label form="catAudience">Catégories d'Audience BellyButton</label>
     <select>
         <option value="10">Aucun</option>

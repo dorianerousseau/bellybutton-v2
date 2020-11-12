@@ -2,7 +2,7 @@
 Name: index.html.twig
 Author: Flavien Macquignon
 Date: 07/10/2020
-Comment: This file is the template to the homepage of the influencer management dashboard
+Comment: Ce fichier est un Template pour l'affichage de tous les influenceurs dans la base de donnée
 #}
 
 {% extends 'main/base.html.twig' %}
@@ -49,10 +49,10 @@ Influenceur Management
           {% for user in users %}
           {% set k = loop.index0 %}
           <tbody>
-            <!--TODO check how to break loop (look into the controller)-->
+            <!--TODO Trouver un moyen de briser la boucle et de n'afficher que 10 Influenceur à la fois et éviter d'avoir une page trop longue-->
             <tr>
-              <!-- FIXME check the issue with images; cannot link to local harddrive; need to see this "in production" -->
-              <td> <img src="E:/Stage_BellyButton/BellyButtonV2/bellybutton-v2/assets/images/Influencer/about.jpg" alt="Display influencer miniature" /></td>
+              <!-- FIXME Afficher les images dans la même format (afin qu'elles aient toutes la même taille) -->
+              <td> <img src="PATH TO IMAGE" alt="Display influencer miniature" /></td>
               <td> <a href="{{ path('selectInfluencer', {'userId':users[k].getId() } ) }} " > {{ users[k].getLastname() }} </a> </br> </td>
               <td> <a href="{{ path('selectInfluencer', {'userId':users[k].getId() } ) }} "> {{ users[k].getFirstname() }} </a> </br> </td>
               <td> <a href="mailto:{{ users[k].getEmail() }}"> {{ users[k].getEmail() }} </a> </br></td>
