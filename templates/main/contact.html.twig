@@ -1,15 +1,14 @@
 {% extends 'base.html.twig' %}
 {% block header %}
-    <a href="{{ path('influencer') }}">Vous êtes influenceurs ?</a>
+    <a href="{{ path('influencer') }}">Vous êtes influenceur ?</a>
     </div>
-    <a class="btn btn--audit" href=" {{path('business_audit')}} ">Votre audit gratuit</a>
 {{ include('base/_auth.html.twig') }}
 {% endblock %}
 {% block title %}Contact{% endblock %}
 
 {% block body %}
     <div class="container container--contact">
-        <h1 class="contact__title">Bonjour, nous somme <span class="contact__title__span">Bellybutton,</span><br> Parlons de votre projet. </h1>
+        <h1 class="contact__title">Bonjour, nous sommes <span class="contact__title__span">BellyButton,</span><br> Parlons de votre projet. </h1>
         <div class="contact__btn">
             <div class="contact__btn__block">
                     <h3>Demande commerciale</h3>

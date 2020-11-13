@@ -1,9 +1,13 @@
 {% extends 'base.html.twig' %}
 {% block header %}
-<a href="{{ path('home') }}">Notre offre</a>
+<a href="{{ path('business') }}">Notre offre</a>
     </div>
+<<<<<<< HEAD
     <a class="btn btn--audit" href=" {{path('business_audit')}} ">Votre audit gratuit</a>
 
+=======
+{{ include('base/_auth.html.twig') }}
+>>>>>>> a726ddf46a311592f1bc65bee6b05c4d27344ee1
 {% endblock %}
 {% block title %}Mentions légales{% endblock %}
 
