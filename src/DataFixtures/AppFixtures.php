@@ -13,10 +13,10 @@ use App\Entity\Campaign;
 use App\Entity\Commentary;
 use Doctrine\DBAL\Connection;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
 use App\DataFixtures\Provider\BellybuttonProvider;
 use App\Entity\Comment;
 use App\Entity\Like;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture

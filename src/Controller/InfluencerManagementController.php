@@ -90,7 +90,7 @@ class InfluencerManagementController extends AbstractController
             $k++;
         } while ($k < $nbrAgences[0]);
         //---------------------------------------------------------
-        //Formulaire AddInfluenceur comprenant les différents champs néceassaires à l'ajout d'un Influenceur
+        //Formulaire AddInfluenceur comprenant les différents champs nécessaires à l'ajout d'un Influenceur
         $add = new AddInfluencer();
         $form = $this->createFormBuilder($add)
             ->add('fname', TextType::class)
@@ -127,7 +127,7 @@ class InfluencerManagementController extends AbstractController
              * (Cette catégorie est déterminée de manière "automatique" en fonction des données des Stats), 
              * si un influenceur se retrouve entre 2 catégories, doit-on pouvoir la changer "automatiquement"?
              * La sélection ici intègre un 1 devant la catégorie; si elle est déterminée automatiquement, on ajoutera un zéro devant la catégorie.
-             * Si jamais la catégorie déterminée "automatiquement", et celle ajoutée "à la main" sont identique, on modifiera la valeur avec un zéro devant
+             * Si jamais la catégorie déterminée "automatiquement" et celle ajoutée "à la main" sont identique, on modifiera la valeur avec un zéro devant
              * Si jamais la valeur a été enregistré depuis une nombre de jours spécifiés, et que l'influenceur n'a pas rejoins la catégorie spécifiée, on la modifiera avec une zéro devant
              *  //WARN vérifier avec PJ ce qui l'intéresse le plus pour cela
              */
@@ -253,7 +253,7 @@ class InfluencerManagementController extends AbstractController
     }
     
 /**
-     * Permet d'ajouter les informations d'un de vente d'un Influenceur à la base de donnée
+     * Permet d'ajouter les informations de vente d'un Influenceur à la base de donnée
      * @param $request
      * @param string $URLYT Détermine si le Champs URLYT était remplis ou non sur le formulaire de addInlfluenceur ('true' ou 'false')
      * @param string $URLTW Détermine si le Champs URLTW était remplis ou non sur le formulaire de addInlfluenceur ('true' ou 'false')
