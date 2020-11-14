@@ -40,10 +40,10 @@ class InfluencerManagementController extends AbstractController
     // TODO Les paramètres de ce PDO doivent êtres changés, ils sont spécifiques au local
     //Constantes pour une connection via PDO
     const host = '127.0.0.1';
-    const port = '3306';
+    const port = '8889';
     const db   = 'bellybutton';
-    const user = 'belly';
-    const pass = 'belly1234&';
+    const user = 'root';
+    const pass = 'root';
     const charset = 'utf8';
 
     const dsn = 'mysql:host=' . self::host . '; port=' . self::port . ';dbname=' . self::db . '';
